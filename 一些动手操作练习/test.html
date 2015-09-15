@@ -43,7 +43,7 @@
         .parent {
             height: 50px;
             display: table;
-            vertical-align: middle;
+            /*vertical-align: middle;*/
         }
 
         .item {
@@ -56,6 +56,34 @@
             vertical-align: middle;
             text-align: center;
 
+        }
+
+        .div1 {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            float: left;
+        }
+
+        .div2 {
+            border: 1px solid #ddd;
+            height: 50px;
+            /*margin-left: 50px;*/
+            overflow: hidden;
+        }
+        .div3{
+            height: 200px;
+            width:200px;
+            display: table-cell;
+            vertical-align: middle;
+            border:1px solid #eee;
+        }
+        .div4{
+            display: table-cell;
+            vertical-align: middle;
+            height: 100px;
+            width:100px;
+            border:1px solid #ddd;
         }
     </style>
 </head>
@@ -77,6 +105,19 @@
         <div class="item">菜单项</div>
         <div class="item">菜单项</div>
         <div class="item">菜单项</div>
+    </div>
+    <div class="div1">
+        块1
+    </div>
+    <div class="div2">
+        块2
+    </div>
+
+    <div class="div3">
+
+        <div class="div4">
+            table-cell
+        </div>
     </div>
 </div>
 </body>
