@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="check">新人报到</button>
+<ul id="world-list">
+
+</ul>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/Underscore-1.8.2.js"></script>
+<script src="js/Backbone-1.1.2.js"></script>
+
+<script>
+    $(function(){
+      var world=Backbone.Model.extend({
+           name:null
+       });
+        var worlds=Backbone.Collection.extend({
+            initialize:function(models,options){
+                this.bind("add",options.view.addOneWorld);
+            }
+        });
+        var appview=Backbone.View.extend({
+            el:$("body"),
+            initialize:function(){
+                this.worlds=new worlds(null,{
+                    view:this
+                });
+            },
+            events:{
+                "click #check":"checkin"
+            },
+            checkin:function(){
+                var name=prompt("输入名称");
+                if(name=="")
+                name="未知的";
+                var model=new world({name:name});
+                this.worlds.add(model);
+
+            },
+            addOneWorld:function(model){
+                $("#world-list").append("<li>欢迎您:"+model.get("name")+"</li>");
+            }
+        });
+        new appview();
+    });
+</script>
+</body>
+</html>
