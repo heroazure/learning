@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>fullPage全屏滚动时差切换效果（兼容IE7及以上版本）</title>
+<link rel="stylesheet" href="css/jquery.fullPage.css">
+<link rel="stylesheet" href="css/jq22.css">
+</head>
+<body>
+
+<!--代码部分begin-->
+<ul id="menu">
+	<li data-menuanchor="page1" class="active"><a href="#page1">1</a></li>
+	<li data-menuanchor="page2"><a href="#page2">2</a></li>
+	<li data-menuanchor="page3"><a href="#page3">3</a></li>
+	<li data-menuanchor="page4"><a href="#page4">4</a></li>
+	<li data-menuanchor="page5"><a href="#page5">5</a></li>
+</ul>
+
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/jquery-ui-1.10.3.min.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+<script>
+$(function(){
+	$.fn.fullpage({
+		slidesColor: ['#009999', '#CC6600', '#CCCC00', '#66CC66', '#CC3366'],
+		anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+		menu: '#menu'
+	});
+});
+</script>
+<!--代码部分end-->
+
+</body>
+</html>

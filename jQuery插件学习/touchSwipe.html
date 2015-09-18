@@ -2,19 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+          name="viewport" id="viewport">
     <title>jquery.touchSwipe 手机上下滑屏特效代码</title>
     <style>
-        * { margin: 0; padding: 0; }
-        html, body { width: 100%; height: 100%; overflow: hidden; }
-        .container { width: 100%; height: 100%; position: absolute; left: 0; top: 0%; }
-        .container .page { height: 100%; position: relative; color:#fff;text-align:center; }
-        .container .page h1{padding-top:120px; line-height:50px; display:block}
-        .container .page0 { background-color: blue; }
-        .container .page1 { background-color:#93F; }
-        .container .page2 { background-color:#F90; }
-        .container .page3 { background-color: green; }
-        .container .page4 { background-color: tomato; }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0%;
+        }
+
+        .container .page {
+            height: 100%;
+            position: relative;
+            color: #fff;
+            text-align: center;
+        }
+
+        .container .page h1 {
+            padding-top: 120px;
+            line-height: 50px;
+            display: block
+        }
+
+        .container .page0 {
+            background-color: blue;
+        }
+
+        .container .page1 {
+            background-color: #93F;
+        }
+
+        .container .page2 {
+            background-color: #F90;
+        }
+
+        .container .page3 {
+            background-color: green;
+        }
+
+        .container .page4 {
+            background-color: tomato;
+        }
+
         /*.container .page1 img.no1 { position: absolute; left: 10px; top: 50px; -webkit-transition: all 1s ease 0s; }*/
         /*.container .page1.cur img.no1 { -webkit-transform: rotate(720deg); }*/
         /*.container .page1 img.no2 { position: absolute; left: 600px; top: 50px; -webkit-transition: all 1s ease 2s; }*/
@@ -46,37 +89,54 @@
 <script src="../js/jquery-1.10.2.min.js"></script>
 <script src="js/touchSwipe.js"></script>
 <script>
+
     $(document).ready(
-            function() {
-                var nowpage = 0;
-                //给最大的盒子增加事件监听
-                $(".container").swipe(
-                        {
-                            swipe:function(event, direction, distance, duration, fingerCount) {
-                                if(direction == "up"){
-                                    nowpage = nowpage + 1;
-                                }else if(direction == "down"){
-                                    nowpage = nowpage - 1;
-                                }
+    function () {
 
-                                if(nowpage > 4){
-                                    nowpage = 4;
-                                }
+        var move = function (e) {
+            e.preventDefault && e.preventDefault();
+            e.returnValue = false;
+            e.stopPropagation && e.stopPropagation();
+            return false;
+        };
+        var keyFunc = function (e) {
+            if (37 <= e.keyCode && e.keyCode <= 40) {
+                return move(e);
+            }
+        };
+        document.body.onkeydown = keyFunc;
 
-                                if(nowpage < 0){
-                                    nowpage = 0;
-                                }
+        var nowpage = 0;
+        //给最大的盒子增加事件监听
+        $(".container").swipe(
+                {
+                    swipe: function (event, direction, distance, duration, fingerCount) {
+                        if (direction == "up") {
+                            nowpage = nowpage + 1;
+                        } else if (direction == "down") {
+                            nowpage = nowpage - 1;
+                        }
 
-                                $(".container").animate({"top":nowpage * -100 + "%"},400);
+                        if (nowpage > 4) {
+                            nowpage = 4;
+                        }
+
+                        if (nowpage < 0) {
+                            nowpage = 0;
+                        }
+
+                        $(".container").animate({"top": nowpage * -100 + "%"}, 400);
 
 //                                $(".page").eq(nowpage).addClass("cur").siblings().removeClass("cur");
-                            }
-                        }
-                );
-            }
-    );
+                    }
+                }
+        );
+    }
+    )
+    ;
 </script>
 <!--代码部分end-->
 
 
-</body></html>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<p><label for="wheelDelta"> 非火狐滚动值:</label>(IE/Opera)<input type="text" id="wheelDelta"/></p>
+
+<p><label for="detail"> 火狐滚动值:(Firefox)</label><input type="text" id="detail"/></p>
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="js/mouseWheel.js"></script>
+<script>
+
+    /***********************
+     * 函数：判断滚轮滚动方向
+     * 参数：event
+     * 返回：滚轮方向 1：向上 -1：向下
+     *************************/
+$(function () {
+    var scrollFunc = function (e) {
+        if ($.upordown(e) == 1) {
+            document.getElementById("wheelDelta").value = "滚轮向上";
+        }
+        if ($.upordown(e) == -1) {
+            document.getElementById("wheelDelta").value = "滚轮向下";
+        }
+    };
+
+    if (document.addEventListener) {
+        document.addEventListener('DOMMouseScroll', scrollFunc, false);//firefox
+    }//W3C
+    window.onmousewheel = document.onmousewheel = scrollFunc;//IE/Opera/Chrome/Safari
+
+});
+
+</script>
+</body>
+</html>
