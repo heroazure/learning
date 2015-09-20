@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transform动画</title>
+    <style>
+        /**
+        http://blog.163.com/prevBlogPerma.do?host=hszy00232&srl=43022753201081822131223&mode=prev
+        *1.scale：缩放，1为原始大小。scale(x)。正数放大，负数缩小。属性值为一个时，x/y轴同时缩放；属性值为两个值时，分别控制x、y轴的缩放。
+        */
+        .scale {
+            width: 100px;
+            height: 50px;
+            background: #f00;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+            color: #fff;
+            border-radius: 5px 5px;
+            padding: 5px;
+        }
+
+        .scale:hover {
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            transform: scale(1.5);
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;
+            -ms-transform-origin: top left;
+            -o-transform-origin: top left;
+            transform-origin: top left;
+            /*-webkit-transform-origin: top center; /!*-webkit-transform-origin设定了变换源点*!/*/
+        }
+
+        /**
+        *2.rotate：水平旋转，属性值格式为Xdeg。(deg是“度”的意思)rotate(Xdeg)。X为正数时，顺时针旋转；为负数时，逆时针旋转
+        */
+        .rotate {
+            width: 100px;
+            height: 50px;
+            background: #f00;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+            color: #fff;
+            border-radius: 5px 5px;
+            padding: 5px;
+        }
+
+        .rotate:hover {
+            -webkit-transform: rotate(10deg);
+            -moz-transform: rotate(10deg);
+            -o-transform: rotate(10deg);
+            -ms-transform: rotate(10deg);
+            transform: rotate(10deg);
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;
+            -ms-transform-origin: top left;
+            -o-transform-origin: top left;
+            transform-origin: top left;
+        }
+
+        /**
+*3.translate：定位元素，基于XY轴重新定位元素。translate(Xpx,Ypx)。属性值为一个时，x、y轴参数相同；为两个时，x、y轴分别定位
+*/
+        .translate {
+            width: 100px;
+            height: 50px;
+            background: #f00;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+            color: #fff;
+            border-radius: 5px 5px;
+            padding: 5px;
+        }
+
+        .translate:hover {
+            -webkit-transform: translate3d(10px, -10px, 2px);
+            -moz-transform: translate3d(10px, -10px, 2px);
+            -o-transform: translate3d(10px, -10px, 2px);
+            -ms-transform: translate3d(10px, -10px, 2px);
+            transform: translate3d(10px, -10px, 2px);
+        }
+
+        /**
+        *4.skew：将元素沿水平方向倾斜变形。skew(Xdeg,Ydeg)。这个比较难表述，想象一下平行四边形吧。属性值为一个时，x、y轴参数相同；为两个时，x、y轴各自倾斜
+        */
+        .skew {
+            width: 100px;
+            height: 50px;
+            background: #f00;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+            color: #fff;
+            border-radius: 5px 5px;
+            padding: 5px;
+        }
+
+        .skew:hover {
+            -webkit-transform: skew(20deg, -10deg);
+            -moz-transform: skew(20deg, -10deg);
+            -o-transform: skew(20deg, -10deg);
+            -ms-transform: skew(20deg, -10deg);
+            transform: skew(20deg, -10deg);
+            -webkit-transform-origin: top left;
+            -moz-transform-origin: top left;
+            -ms-transform-origin: top left;
+            -o-transform-origin: top left;
+            transform-origin: top left;
+        }
+
+        .matrix {
+            width: 100px;
+            height: 50px;
+            background: #f00;
+            -webkit-transition: all .5s ease;
+            -moz-transition: all .5s ease;
+            -ms-transition: all .5s ease;
+            -o-transition: all .5s ease;
+            transition: all .5s ease;
+            color: #fff;
+            border-radius: 5px 5px;
+            padding: 5px;
+        }
+
+        .matrix:hover {
+            -webkit-transform: matrix(1, -0.2, 0, 1, 0, 0);
+            -moz-transform: matrix(1, -0.2, 0, 1, 0, 0);
+            -o-transform: matrix(1, -0.2, 0, 1, 0, 0);
+            -ms-transform: matrix(1, -0.2, 0, 1, 0, 0);
+            transform: matrix(1, -0.2, 0, 1, 0, 0);
+        }
+    </style>
+</head>
+<body>
+<div class="scale">transform scale动画效果</div>
+<br>
+
+<div class="rotate">transform rotate动画效果</div>
+
+<br>
+
+<div class="translate">transform translate动画效果</div>
+
+<br>
+
+<div class="skew">transform skew动画效果</div>
+
+<br>
+
+<div class="matrix">transform matrix动画效果</div>
+</body>
+</html>
