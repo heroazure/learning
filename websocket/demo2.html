@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="input" style="width:100%;"/>
+
+<script>
+    window.onload= function () {
+        var nick=prompt("输入昵称");
+        var input=document.getElementById("input");
+        input.focus();
+
+        var socket=new WebSocket("url");
+        socket.onmessage= function (e) {
+            var msg= e.data;
+            var node=document.createTextNode(msg);
+            var div=document.createElement("div");
+            div.appendChild(node);
+            document.body.insertBefore(div,input);
+            input.scrollIntoView();
+        }
+
+        input.onchange= function () {
+            var msg=nick+":"+input.value;
+            socket.send(msg);
+            input.value="";
+        }
+    }
+</script>
+</body>
+</html>
