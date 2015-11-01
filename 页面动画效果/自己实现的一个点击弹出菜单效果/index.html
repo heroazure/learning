@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/font-awesome-4.2.0.css"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="menu">
+    <div class="toggle"><i class="fa fa-angle-double-up"></i></div>
+    <div><i class="fa fa-qq"></i></div>
+    <div><i class="fa fa-weixin"></i></div>
+    <div><i class="fa fa-renren"></i></div>
+</div>
+
+<script src="../../js/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        $("div.toggle").on("click", function () {
+            var $menu = $(this).parent();
+//            $(this).parent().toggleClass("active");
+            if ($menu.hasClass("active"))
+                $menu.removeClass("active").addClass("hide");
+            else {
+                $menu.removeClass("hide").addClass("active");
+            }
+
+            var $i = $(this).find("i");
+            if ($i.hasClass("fa-angle-double-up")) {
+                $i.removeClass("fa-angle-double-up").addClass("fa-angle-double-down");
+            } else {
+                $i.removeClass("fa-angle-double-down").addClass("fa-angle-double-up");
+            }
+        });//transitionend
+        $(".menu>div:not(:first-child)").on('animationend webkitAnimationEnd', function () {
+            $(this).find("i").toggleClass("ss_animate");
+        });
+//        $(".menu .fa-qq").on("animationend webkitAnimationEnd", function () {
+//            alert("11");
+//            $(this).removeClass("ss_animate");
+//        })
+    })
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="../css/animate.css"/>
     <style>
         html, body {
             margin: 0;
@@ -10,6 +11,11 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
+        }
+        *,*::before,*::after{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         }
 
         .parent {
@@ -43,6 +49,15 @@
 
         .child2 {
             background-color: #330066;
+            text-align: center;
+            color: #ffffff;
+            padding-top: 300px;
+        }
+        .child2 .child2-1{
+
+            margin:0 auto;
+            width:200px;
+            height: 150px;
         }
 
         .child3 {
@@ -58,7 +73,9 @@
 <div class="parent">
     <div class="child child0">child</div>
     <div class="child child1">child</div>
-    <div class="child child2">child</div>
+    <div class="child child2">
+        <div class="child2-1"><h1 style="display: block;">animate.css</h1></div>
+    </div>
     <div class="child child3">child</div>
     <div class="child child4">child</div>
 </div>
@@ -92,6 +109,11 @@
                         $(".parent").animate({"top": nowpage * -100 + "%"}, 900,"easeInBack").promise().done(function () {
                             canScroll = true;
                         });//两种方式都行，后面这种要浏览器支持css3
+                        if(nowpage==2){
+                            $(".child2-1 h1").removeClass("animated rubberBand hinge").addClass("animated rubberBand hinge").one("animationend webkitAnimationEnd", function () {
+                                $(this).removeClass("animated rubberBand hinge");
+                            })
+                        }
 //                        var translate3d="translate3d(0px, "+nowpage * -100 +"%, 0px)";
 //                        $(".parent").css({
 //                            "-webkit-transform": translate3d,
@@ -114,6 +136,11 @@
                         $(".parent").animate({"top": nowpage * -100 + "%"}, 900, "easeInBack").promise().done(function () {
                             canScroll = true;
                         });
+                        if(nowpage==2){
+                            $(".child2-1 h1").removeClass("animated rubberBand hinge").addClass("animated rubberBand hinge").one("animationend webkitAnimationEnd", function () {
+                                $(this).removeClass("animated rubberBand hinge");
+                            })
+                        }
 //                        var translate3d="translate3d(0px, "+nowpage * -100 +"%, 0px)";
 //                        $(".parent").css({
 //                            "-webkit-transform": translate3d,
