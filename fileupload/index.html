@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fileupload</title>
+    <link rel="stylesheet" href="../css/dropzone.css">
+</head>
+<body>
+<form action="/upload-target" class="dropzone dz-clickable">
+    <div class="dz-default dz-message">
+        <span>Drop files here to upload</span>
+    </div>
+</form>
+
+<form action="/file-upload"
+      class="dropzone"
+      id="my-awesome-dropzone"></form>
+
+<div style="width: 100px;height: 100px;border: 1px solid red;" id="upl">
+    <input type="file" name="file">
+</div>
+
+<script src="../js/dropzone.js"></script>
+<script>
+    $(function () {
+        $("div#upl").dropzone({ url: "/file/post" });
+    })
+</script>
+</body>
+</html>
