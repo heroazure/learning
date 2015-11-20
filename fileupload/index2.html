@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 
 <title>Dropzone simple example</title>
-
+<!--https://github.com/enyo/dropzone/wiki/Remove-all-files-with-one-button-->
 
 <!--
   DO NOT SIMPLY COPY THOSE LINES. Download the JS and CSS files from the
@@ -13,11 +13,42 @@
 <script src="../js/dropzone.js"></script>
 <link rel="stylesheet" href="../css/dropzone.css">
 
+<button id="submit-all">提交所有文件</button>
+<button id="clear-dropzone">清除所有文件</button>
+<form action="/target" class="dropzone" id="my-dropzone"></form>
 
-<p>
-    This is the most minimal example of Dropzone. The upload in this example
-    doesn't work, because there is no actual server to handle the file upload.
-</p>
+<script>
+    Dropzone.options.myDropzone = {
 
-<!-- Change /upload-target to your upload address -->
-<form action="/upload-target" class="dropzone"></form>
+        // Prevents Dropzone from uploading dropped files immediately
+        autoProcessQueue: false,
+        maxFiles:2,
+
+        init: function() {
+            var submitButton = document.querySelector("#submit-all"),
+                    myDropzone = this; // closure
+
+            submitButton.addEventListener("click", function() {
+                myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+            });
+            // Setup the observer for the button.
+            document.querySelector("button#clear-dropzone").addEventListener("click", function() {
+                // Using "_this" here, because "this" doesn't point to the dropzone anymore
+                myDropzone.removeAllFiles();
+                // If you want to cancel uploads as well, you
+                // could also call _this.removeAllFiles(true);
+            });
+
+            // You might want to show the submit button only when
+            // files are dropped here:
+            this.on("addedfile", function(file) {
+                // Show submit button here and/or inform user to click it.
+                alert("add file "+file.name)
+            });
+            this.on("sending", function(file) {
+                alert('Sending the file ' +  file.name)
+            });
+        },
+
+    };
+</script>
