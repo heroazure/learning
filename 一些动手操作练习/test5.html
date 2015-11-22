@@ -30,11 +30,12 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>Tanmay</td>
-                    <td>Bangalore</td>
+
+                    <td>Tanmay <b>正常的字体</b><i>斜体</i><small>更小的字体</small></td>
+                    <td><abbr title="缩略语标签">缩略...</abbr></td>
                 </tr>
                 <tr>
-                    <td>Sachin</td>
+                    <th scope="row">44</th>
                     <td>Mumbai</td>
                 </tr>
                 </tbody>
@@ -43,5 +44,22 @@
         </div>
     </div>
 </div>
+<style>
+    .fix{
+        position: fixed;
+        bottom: 0;
+        border: 1px solid red;
+        height: 100px;
+        /*text-align: center;*/
+        width: 50%;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<div class="fix">固定底部居中</div>
 </body>
 </html>
