@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取银行卡名称</title>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<input id="bankid" type="text"/>
+<input type="button" value="获取" onclick="getname();"/>
+<script>
+    // 根据银行卡号获取发卡行名称
+   var getBankName = function (bankCard) {
+        if (bankCard == null || bankCard == "") {
+            alert("");
+        }
+        $.getJSON("bankData.json", {}, function (data,status) {
+            if(!status){
+                alert("失败");
+                return;
+            }
+            var bankBin = 0;
+            var isFind = false;
+            for (var key = 10; key >= 2; key--) {
+                bankBin = bankCard.substring(0, key);
+                $.each(data, function (i, item) {
+                    if (item.bin == bankBin) {
+                        isFind = true;
+                        alert(item.bankName);
+                        return;
+                    }
+                });
+
+                if (isFind) {
+                    break;
+                }
+            }
+
+            if (!isFind) {
+                alert("未知发卡银行");
+                return;
+            }
+        });
+    }
+    function getname(){
+        getBankName(document.getElementById("bankid").value+"");
+    }
+</script>
+</body>
+</html>
