@@ -12,20 +12,34 @@
     <link rel="stylesheet" href="/css/common.css"/>
     <link rel="stylesheet" href="/css/page/home.css"/>
     <link rel="stylesheet" href="/css/font-awesome.css"/>
+    <style>
+        .empty-hint {
+            text-align: center;
+            padding-top: 200px;
+            font-size: 16px;
+        }
 
+        .empty-hint a.target {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: underline !important;
+            color: #770303;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="tab-content js-content">
         <!-- 首页tab内容-->
-        <div role="tabpanel" id="home" class="tab-pane active">
+        <div role="tabpanel" id="home" class="tab-pane">
             <div class="row">
                 <!-- Swiper -->
-                <div class="swiper-container" style="height: auto;">
-                    <div class="swiper-wrapper">
+                <div class="swiper-container" style="height: 150px;width: 100%;">
+                    <div class="swiper-wrapper" style="width: 100%;height: 100%;">
                         <?php foreach($pictures as $picture):?>
-                        <a href="<?php echo $picture['link_url'];?>" class="swiper-slide no-decoration-a block">
-                            <img src="<?php echo $picture['picture_url'];?>" class="img-responsive" width="100%"
+                        <a href="<?php echo $picture['link_url'];?>" class="swiper-slide no-decoration-a block"
+                           style="width: 100%;height: 100%;">
+                            <img src="<?php echo $picture['picture_url'];?>" width="100%" height="100%"
                                  alt="原石推荐">
                         </a>
                         <?php endforeach; ?>
@@ -44,15 +58,16 @@
                         <span class="title"><?php echo $stone_info['expert']['name'];?></span><span
                             class="tag"><?php echo $stone_info['expert']['title'];?></span>
                         <br>
-                        <span><?php echo $stone_info['expert']['note'];?></span>
+                        <span class="font-blur"><?php echo $stone_info['expert']['note'];?></span>
                     </div>
                     <div class="col-xs-2 text-right star">
                         <?php if (in_array($stone_info['stone_id'], $stone_ids)){ ?>
-                        <span class="fa fa-star js-store active" data-id="<?php echo $stone_info['stone_id']; ?>"></span>
+                        <span class="fa fa-star js-store active"
+                              data-id="<?php echo $stone_info['stone_id']; ?>"></span>
                         <?php }else{ ?>
                         <span class="fa fa-star js-store " data-id="<?php echo $stone_info['stone_id']; ?>"></span>
                         <?php }?>
-                        </div>
+                    </div>
                 </div>
                 <div class="img clearfix">
                     <div class="col-xs-12">
@@ -63,24 +78,24 @@
                     <div class="foot-top clearfix">
                         <div class="col-xs-6 title"><?php echo $stone_info['info']['title']; ?></div>
                         <div class="col-xs-6 txt1 text-right"><?php echo $stone_info['block']['price']; ?>
-元起投,已投<?php echo $stone_info['count']; ?>份
+                            元起投,已投<?php echo $stone_info['count']; ?>份
                         </div>
                     </div>
                     <div class="foot-desc clearfix">
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 clear-rightpadding">
                             筹集目标 <br>
                             <span class="txt2"><?php echo $stone_info['block']['target_amount']; ?></span>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 clear-rightpadding">
                             达成率 <br>
                             <span class="txt2"><?php  echo $stone_info['block']['finish_rate']; ?>%</span>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-2 clear-rightpadding clear-leftpadding">
                             期限 <br>
                             <span class="txt3"><?php echo floor(($stone_info['time']['subscribe_end_time']-$stone_info['time']['subscribe_start_time'])/(3600*24)); ?></span>天
                         </div>
-                        <div class="col-xs-3">
-                            <a href="/stone/detail/<?php echo $stone_info['stone_id']; ?>" class="btn">查看详情</a>
+                        <div class="col-xs-4 operate">
+                            <a href="/stone/detail/<?php echo $stone_info['stone_id']; ?>" class="btn">了解详情</a>
                         </div>
                     </div>
                 </div>
@@ -92,20 +107,26 @@
         <div role="tabpanel" id="proList" class="tab-pane">
             <!-- Nav tabs -->
             <div class="row">
-                <ul class="nav nav-custom-justified" role="tablist">
-                    <li role="presentation" class="active"><a href="#carryon" aria-controls="carryon" role="tab"
-                                                              data-toggle="tab">进行中</a></li>
-                    <li role="presentation"><a href="#preview" aria-controls="preview" role="tab"
-                                               data-toggle="tab">预展中</a>
+                <ul id="proList-nav" class="nav nav-custom-justified" role="tablist">
+                    <li role="carryon" class="active"><a href="#carryon" aria-controls="carryon" role="tab"
+                                                         data-toggle="tab">进行中</a></li>
+                    <li role="preview"><a href="#preview" aria-controls="preview" role="tab"
+                                          data-toggle="tab">预展中</a>
                     </li>
-                    <li role="presentation"><a href="#finish" aria-controls="finish" role="tab"
-                                               data-toggle="tab">已结束</a>
+                    <li role="finish"><a href="#finish" aria-controls="finish" role="tab"
+                                         data-toggle="tab">已结束</a>
                     </li>
                 </ul>
             </div>
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="carryon">
+                    <?php if(empty($stone_carryon)){?>
+                    <div class="row empty-hint">
+                        <span class="empty-desc">当前还没有认购中的宝贝</span> <br>
+                        <a class="target" href="/home">去首页逛逛</a>
+                    </div>
+                    <?php }else{ ?>
                     <?php foreach($stone_carryon as $stone) { ?>
                     <a class="row item hastag" href="/stone/detail/<?php echo $stone['stone_id']; ?>">
                         <div class="col-xs-4 item-img">
@@ -136,15 +157,23 @@
                             </div>
                         </div>
                         <div class="tag">
-                            距结束<?php echo $stone['day']; ?>天
-                            <?php echo $stone['hour']; ?>时
-                            <?php echo $stone['minute']; ?>分
-                            <?php echo $stone['second']; ?>秒
+                            距结束<?php echo $stone['day'];?>天<?php echo $stone['hour'];?>时<?php echo $stone['minute'];?>
+                            分<?php echo $stone['second'];?>秒
                         </div>
                     </a>
                     <?php } ?>
+                    <div id="load-more-carryon" data-currpage="1" class="row load-more">
+                        加载更多...
+                    </div>
+                    <?php } ?>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="preview">
+                    <?php if(empty($stone_preview)){?>
+                    <div class="row empty-hint">
+                        <span class="empty-desc">当前还没有预展中的宝贝</span> <br>
+                        <a class="target" href="/home">去首页逛逛</a>
+                    </div>
+                    <?php }else{ ?>
                     <?php foreach($stone_preview as $stone) { ?>
                     <a class="row item" href="/stone/detail/<?php echo $stone['stone_id']; ?>">
                         <div class="col-xs-4 item-img">
@@ -155,19 +184,30 @@
                                 <div class="col-xs-12 title-normal"><?php echo $stone['title']; ?></div>
                             </div>
                             <div class="row line2">
-                                <div class="col-xs-12 row1">筹&nbsp;<span
+                                <div class="col-xs-7 row1">筹&nbsp;<span
                                         class="title-normal"><?php echo '￥'.$stone['target_amount']; ?></span></div>
+                                <div class="col-xs-5 row1 text-right"><?php echo $stone['firstGlod']; ?>元起投</div>
                             </div>
                             <div class="row line3">
-                                <div class="col-xs-7"><span class="font-warn"><?php echo $stone['start_time']; ?>
+                                <div class="col-xs-12"><span class="font-warn"><?php echo $stone['start_time']; ?>
                                     开始</span></div>
-                                <div class="col-xs-5"><?php echo $stone['firstGlod']; ?>元起投</div>
+
                             </div>
                         </div>
                     </a>
                     <?php } ?>
+                    <div id="load-more-preview" data-currpage="1" class="row load-more">
+                        加载更多...
+                    </div>
+                    <?php } ?>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="finish">
+                    <?php if(empty($stone_finish)){?>
+                    <div class="row empty-hint">
+                        <span class="empty-desc">当前还没有已结束的宝贝</span> <br>
+                        <a class="target" href="/home">去首页逛逛</a>
+                    </div>
+                    <?php }else{ ?>
                     <?php foreach($stone_finish as $stone) { ?>
                     <a class="row item" href="/stone/detail/<?php echo $stone['stone_id']; ?>">
                         <div class="col-xs-4 item-img">
@@ -178,16 +218,23 @@
                                 <div class="col-xs-12 title-normal"><?php echo $stone['title']; ?></div>
                             </div>
                             <div class="row line2">
-                                <div class="col-xs-12 row1">筹&nbsp;<span class="title-normal"><span
-                                        class="font-blur"><?php echo '￥'.$stone['target_amount']; ?></span></span>
+                                <div class="col-xs-7 row1">筹&nbsp;<span
+                                        class="title-normal"><?php echo '￥'.$stone['target_amount']; ?></span>
+                                </div>
+                                <div class="col-xs-5 row1 text-right clear-leftpadding">
+                                    共投<?php echo $stone['purchased']; ?>份
                                 </div>
                             </div>
-                            <div class="row line3">
-                                <div class="col-xs-7"><?php echo $stone['end_time']; ?>结束</div>
-                                <div class="col-xs-5">共投<?php echo $stone['purchased']; ?>份</div>
+                            <div class="row line3 font-blur">
+                                <div class="col-xs-12"><?php echo $stone['end_time']; ?>结束</div>
+
                             </div>
                         </div>
                     </a>
+                    <?php } ?>
+                    <div id="load-more-finish" data-currpage="1" class="row load-more">
+                        加载更多...
+                    </div>
                     <?php } ?>
                 </div>
             </div>
@@ -201,7 +248,12 @@
                     </div>
                     <div class="col-xs-7">
                         <span class="title-normal"><?php echo $this->cur_user['nickname'];?></span> <br>
-                        <?php echo $this->cur_user['phone'];?>
+                        <?php
+                         $string = $this->cur_user['phone'];
+                        $pattern = "/(1\d{1,2})\d\d(\d{0,2})/";
+                        $replacement = "\$1****\$3";
+                        print preg_replace($pattern, $replacement, $string);
+                        ?>
                     </div>
                     <div class="col-xs-2 text-right">
                         <span class="icon icon-rightmenu"></span>
@@ -209,8 +261,10 @@
                 </a>
 
                 <div class="clearfix user-head-operate">
-                    <a href="/recharge/add" class="col-xs-6 rightline block"><span class="icon icon-recharge"></span>&nbsp;&nbsp;我要充值</a>
-                    <a href="/withdraw/url_moneyout" class="col-xs-6 block"><span class="icon icon-moneyout"></span>&nbsp;&nbsp;我要提现</a>
+                    <a href="/recharge/add" class="col-xs-6 rightline block title-normal" style="color: #333;"><span
+                            class="icon icon-recharge"></span>&nbsp;&nbsp;我要充值</a>
+                    <a href="javascript:;" id="withdraw_submit" class="col-xs-6 block title-normal"
+                       style="color: #333;"><span class="icon icon-moneyout"></span>&nbsp;&nbsp;我要提现</a>
                 </div>
             </div>
             <div class="row bg-block bg-block-xs"></div>
@@ -231,7 +285,7 @@
                         <span class="font-blur"><?php echo $profit; ?></span>
                     </div>
                 </a>
-                <a class="col-xs-6 rightline">
+                <a href="/card/my_cards" class="col-xs-6 rightline rootline">
                     <span class="icon icon-bankcard"></span>
 
                     <div class="user-pane-info">
@@ -239,7 +293,7 @@
                         <span class="font-blur">查看详情</span>
                     </div>
                 </a>
-                <a class="col-xs-6">
+                <a class="col-xs-6 rootline">
                     <span class="icon icon-box"></span>
 
                     <div class="user-pane-info">
@@ -247,10 +301,18 @@
                         <span class="font-blur">暂未开放</span>
                     </div>
                 </a>
+                <a href="/user/flow" class="col-xs-6 rightline">
+                    <span class="icon icon-box"></span>
+
+                    <div class="user-pane-info">
+                        <span class="title-normal">资金流水</span> <br>
+                        <span class="font-blur">查看详情</span>
+                    </div>
+                </a>
             </div>
             <div class="row bg-block bg-block-xs"></div>
             <div class="row user-pane">
-                <a href="/user/myWaboon" class="col-xs-6 rootline rightline">
+                <a href="/user/myWaboon/" class="col-xs-6 rootline rightline">
                     <span class="icon icon-myopen"></span>
 
                     <div class="user-pane-info">
@@ -258,7 +320,7 @@
                         <span class="font-blur">查看详情</span>
                     </div>
                 </a>
-                <a href="/user/myCollection" class="col-xs-6 rootline">
+                <a href="/user/myCollection/" class="col-xs-6 rootline">
                     <span class="icon icon-mystore"></span>
 
                     <div class="user-pane-info">
@@ -266,15 +328,15 @@
                         <span class="font-blur">查看详情</span>
                     </div>
                 </a>
-                <!--
                 <a href="/user/myNotice" class="col-xs-6 rightline">
                     <span class="icon icon-myinfo"></span>
+
                     <div class="user-pane-info">
-                        <span class="title-normal">我的消息</span> <br>
+                        <span class="title-normal">我的消息</span><?php if($mesage_is_read_nums > 0) echo
+                        "(".$mesage_is_read_nums.")";?> <br>
                         <span class="font-blur">查看消息</span>
                     </div>
                 </a>
-                -->
             </div>
             <div class="row bg-block bg-block-lg"></div>
         </div>
@@ -282,28 +344,40 @@
         <div role="tabpanel" id="public" class="tab-pane">
             <!-- Nav tabs -->
             <div class="row">
-                <ul class="nav nav-custom-justified" role="tablist">
-                    <li role="presentation" class="active"><a href="#forecastContent" id="forecastTab"
-                                                              aria-controls="forecastContent"
-                                                              role="tab"
-                                                              data-toggle="tab">开宝预告</a></li>
-                    <li role="presentation"><a href="#publicContent" id="publicTab" aria-controls="publicContent"
-                                               role="tab"
-                                               data-toggle="tab">开宝公示</a>
+                <ul id="public-nav" class="nav nav-custom-justified" role="tablist">
+                    <li role="forecast">
+                        <a href="#forecastContent" id="forecastTab"
+                           aria-controls="forecastContent"
+                           role="tab"
+                           data-toggle="tab">开宝预告</a>
+                    </li>
+                    <li role="public">
+                        <a href="#publicContent" id="publicTab"
+                           aria-controls="publicContent"
+                           role="tab"
+                           data-toggle="tab">开宝公示</a>
                     </li>
                 </ul>
             </div>
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="forecastContent">
+                    <div id="load-more-forecast" data-currpage="1" class="row load-more">
+                        加载更多...
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="publicContent">
+                    <div id="load-more-public" data-currpage="1" class="row load-more">
+                        加载更多...
+                    </div>
                 </div>
             </div>
         </div>
         <!-- 百宝箱tab内容-->
         <div role="tabpanel" id="box" class="tab-pane">
-            暂未开放
+            <div class="bbx">
+                <img src="/images/plwait.jpg" alt="敬请期待"/>
+            </div>
         </div>
     </div>
 
@@ -312,7 +386,7 @@
 <nav id="footerBar" class="container navbar navbar-default navbar-fixed-bottom navbar-custom-footer">
     <div class="row">
         <ul class="nav">
-            <li class="active2" data-target="home">
+            <li data-target="home">
                 <div class="footer-icon icon1 center-block"></div>
                 <span class="span2">首页</span>
             </li>
@@ -334,59 +408,159 @@
         </ul>
     </div>
 </nav>
-<!--<div class="hint">
-    收藏成功!
-</div>-->
-<script id="forecastTpl" type="x-tmpl-mustache">
+<script id="carryonTpl" type="x-tmpl-mustache">
 {{#items}}
-<a href="stone/detail/{{id}}" class="row item">
+<a class="row item hastag" href="/stone/detail/{{stone_id}}">
                         <div class="col-xs-4 item-img">
                             <img src="{{image_url}}" alt="原石">
                         </div>
                         <div class="col-xs-8 item-info">
                             <div class="row">
-                                <div class="col-xs-12 title-normal">{{category_name}}</div>
+                                <div class="col-xs-12 title-normal">{{title}}</div>
                             </div>
                             <div class="row line2">
-                                <div class="col-xs-12 row1">
-                                    <span class="icon icon-time"></span><span>{{date}}</span>
+                                <div class="col-xs-6 row1">筹&nbsp;<span class="font-warn"><span
+                                        class="number-warn">{{target_amount}}</span></span>
+                                </div>
+                                <div class="col-xs-6 row2">
+                                    <span class="font-warn">{{finishRate}}</span>
+
+                                    <div class="progress progress-style1">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100" style="width:{{finishRate}}">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row line3">
-                                <div class="col-xs-12">
-                                    <span class="icon icon-address"></span><span>{{address}}</span>
-                                </div>
+                                <div class="col-xs-6">{{firstGlod}}元起投</div>
+                                <div class="col-xs-6">已投{{purchased}}份</div>
                             </div>
                         </div>
-</a>
+                        <div class="tag">
+                            距结束{{day}}天{{hour}}时{{minute}}分{{second}}秒
+                        </div>
+                    </a>
 {{/items}}
 
+
+</script>
+<script id="previewTpl" type="x-tmpl-mustache">
+{{#items}}
+<a class="row item" href="/stone/detail/{{stone_id}}">
+                        <div class="col-xs-4 item-img">
+                            <img src="{{image_url}}" alt="原石">
+                        </div>
+                        <div class="col-xs-8 item-info">
+                            <div class="row">
+                                <div class="col-xs-12 title-normal">{{title}}</div>
+                            </div>
+                            <div class="row line2">
+                                <div class="col-xs-12 row1">筹&nbsp;<span
+                                        class="title-normal">{{target_amount}}</span></div>
+                            </div>
+                            <div class="row line3">
+                                <div class="col-xs-7"><span class="font-warn">{{start_time}}
+                                    开始</span></div>
+                                <div class="col-xs-5 text-right">{{firstGlod}}元起投</div>
+                            </div>
+                        </div>
+                    </a>
+{{/items}}
+
+
+</script>
+<script id="finishTpl" type="x-tmpl-mustache">
+{{#items}}
+<a class="row item" href="/stone/detail/{{stone_id}}">
+                        <div class="col-xs-4 item-img">
+                            <img src="{{image_url}}" alt="原石">
+                        </div>
+                        <div class="col-xs-8 item-info">
+                            <div class="row">
+                                <div class="col-xs-12 title-normal">{{title}}</div>
+                            </div>
+                            <div class="row line2">
+                                <div class="col-xs-12 row1">筹&nbsp;<span class="title-normal">{{target_amount}}</span>
+                                </div>
+                            </div>
+                            <div class="row line3 font-blur">
+                                <div class="col-xs-7">{{end_time}}结束</div>
+                                <div class="col-xs-5 text-right clear-leftpadding">共投{{purchased}}份</div>
+                            </div>
+                        </div>
+                    </a>
+{{/items}}
+
+
+</script>
+<script id="forecastTpl" type="x-tmpl-mustache">
+{{#items}}
+<a href="/stone/detail/{{id}}" class="row item">
+    <div class="col-xs-4 item-img">
+        <img src="{{image_url}}" alt="原石">
+    </div>
+    <div class="col-xs-8 item-info">
+        <div class="row">
+            <div class="col-xs-12 title-normal">{{title}}</div>
+        </div>
+        <div class="row line2" style="margin-top:10px;">
+            <div class="col-xs-12 row1">
+                <span class="icon icon-time"></span><span>{{date}}</span>
+            </div>
+        </div>
+        <div class="row line3" style="margin-top:5px;">
+            <div class="col-xs-12">
+                <span class="icon icon-address"></span><span>{{address}}</span>
+            </div>
+        </div>
+    </div>
+</a>
+{{/items}}
 
 
 </script>
 <script id="publicTpl" type="x-tmpl-mustache">
 {{#items}}
-<a href="stone/detail/{{id}}" class="row item">
-                        <div class="col-xs-4 item-img">
-                            <img src="{{image_url}}" alt="原石">
-                        </div>
-                        <div class="col-xs-8 item-info">
-                            <div class="row">
-                                <div class="col-xs-12 title-normal">{{category_name}}</div>
-                            </div>
-                            <div class="row line2">
-                                <div class="col-xs-12 row1">
-                                    <span class="icon icon-time"></span><span>{{date}}</span>
-                                </div>
-                            </div>
-                            <div class="row line3">
-                                <div class="col-xs-12">
-                                    <span class="icon icon-address"></span><span>{{address}}</span>
-                                </div>
-                            </div>
-                        </div>
+<a href="/stone/kaibaodetail/{{id}}" class="row item">
+    <div class="col-xs-4 item-img">
+        <img src="{{image_url}}" alt="原石">
+    </div>
+    <div class="col-xs-8 item-info">
+        <div class="row">
+            <div class="col-xs-12 title-normal">{{title}}</div>
+        </div>
+        <div class="row line2" style="margin-top:10px;">
+            <div class="col-xs-12 row1">
+                <span class="icon icon-time"></span><span>{{date}}</span>
+            </div>
+        </div>
+        <div class="row line3" style="margin-top:5px;">
+            <div class="col-xs-12">
+                <span class="icon icon-address"></span><span>{{address}}</span>
+            </div>
+        </div>
+    </div>
 </a>
 {{/items}}
+
+
+</script>
+<script id="nodatatpl" type="x-tmpl-mustache">
+ <div class="row empty-hint">
+                        <span class="empty-desc">当前还没有宝贝的开宝预告</span> <br>
+                        <a class="target" href="/home">去首页逛逛</a>
+                    </div>
+
+
+
+</script>
+<script id="nopublictpl" type="x-tmpl-mustache">
+ <div class="row empty-hint">
+                        <span class="empty-desc">当前还没有已开宝的宝贝</span> <br>
+                        <a class="target" href="/home">去首页逛逛</a>
+                    </div>
 
 
 
@@ -398,17 +572,17 @@
         base: "/js/",
         alias: {
             "jquery": "plugin/jquery.js",
-            "home":"page/home.js",
-            "bootstrap":"plugin/bootstrap.min.js",
-            "mustache":"plugin/mustache.min.js",
-            "swiper":"plugin/swiper.min.js",
-            "tap":"common/tap.js",
-            "store":"common/store.js"
+            "home": "page/home.js",
+            "bootstrap": "plugin/bootstrap.min.js",
+            "mustache": "plugin/mustache.min.js",
+            "swiper": "plugin/swiper.min.js",
+            "tap": "common/tap.js",
+            "store": "common/store.js"
         }
     });
     seajs.use(['jquery', 'home'], function ($, home) {
         $(document).ready(function () {
-           new home().init();
+            new home().init();
         });
     });
 </script>

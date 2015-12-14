@@ -57,6 +57,7 @@
 
     /*------------*/
     var startPos,endPos,index=0,isScrolling, slider=document.getElementById('slider');
+    var width=document.querySelector(".m-slider").offsetWidth;
     var icons=document.getElementById('icons'),
             icon=icons.getElementsByTagName('span');
     var start=function(event){
@@ -74,10 +75,12 @@
         if(isScrolling === 0){
             event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
             slider.className = 'cnt';
-            slider.style.left = -index*600 + endPos.x + 'px';
+            slider.style.left = -index*width + endPos.x + 'px';
+            //slider.style.left = slider.style.left + endPos.x + 'px';
         }
     }
     var end=function(event) {
+        alert(index);
         var duration = +new Date - startPos.time; //滑动的持续时间
         if (isScrolling === 0) { //当为水平滚动时
             icon[index].className = '';
@@ -91,7 +94,7 @@
             }
             icon[index].className = 'curr';
             slider.className = 'cnt f-anim';
-            slider.style.left = -index * 600 + 'px';
+            slider.style.left = -index * width + 'px';
         }
 //解绑事件
         slider.removeEventListener('touchmove', move);
