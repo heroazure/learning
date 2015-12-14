@@ -51,7 +51,6 @@
 <body>
 <div id="myAwesomeDropzone" class="dropzone file-pane">
     <div class="dropzone-previews"></div>
-    <input type="file" name="file"/>
     <div id="file-add" class="dz-preview file-add">+</div>
 </div>
 <button type="button" class="btn btn-warning" id="clear-dropzone">清空</button>
@@ -64,13 +63,13 @@
         Dropzone.autoDiscover = false;
         $("#myAwesomeDropzone").dropzone({
             url: "handle-upload.php",
-            maxFilesize: 512,
+            maxFilesize: 100,
             paramName:"images",
             //acceptedFiles: ".js,.obj,.dae",
             autoProcessQueue: false,
             addRemoveLinks: true,
-            dictRemoveFile: "x",
-            dictCancelUpload: "x",
+            dictRemoveFile: "删除",
+            //dictCancelUpload: "取消",
             dictMaxFilesExceeded:"最多只能上传10个文件",
             uploadMultiple: true,
             parallelUploads: 100,
@@ -106,7 +105,6 @@
                 // You might want to show the submit button only when
                 // files are dropped here:
                 this.on("addedfile", function (file) {
-                    alert("222");
                 });
                 this.on("sending", function (file) {
                     alert('Sending the file ' + file.name)
