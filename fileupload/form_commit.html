@@ -20,8 +20,13 @@
     <button type="submit">Submit data and files!</button>
     <button id="clear-dropzone">清除所有文件</button>
 </form>
+<input type="button" id="upload" class="btn btn-primary fileinput-button" value="上传"/>
 
+<script src="../js/jquery-1.10.2.min.js"></script>
 <script>
+    $("#upload").on("click", function () {
+        $(".dz-hidden-input").trigger("click");
+    });
     Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
 
         // The configuration we've talked about above
@@ -29,7 +34,7 @@
         uploadMultiple: true,
         parallelUploads: 100,
         maxFiles: 100,
-        //clickable:false,
+        clickable:false,
         previewsContainer: ".dropzone-previews",
 
         // The setting up of the dropzone
