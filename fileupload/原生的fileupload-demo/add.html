@@ -1,0 +1,331 @@
+<?php $this->load->view('common/top'); ?>
+<?php $this->load->view('common/left'); ?>
+<?php $this->load->view('common/nav'); ?>
+
+<!-- begin 真正的内容区-->
+<style>
+    .file-hidden {
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .img-preview {
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        position: relative;
+        display: none;
+    }
+
+    .img-preview img {
+        display: block;
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+
+    .img-preview .delete {
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-decoration: underline;
+        color: #00f;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet-body form">
+
+            <!-- BEGIN FORM-->
+            <form action="/home/save" method="post" class="form-horizontal form-row-seperated">
+                <div class="form-body">
+                    <div class="form-group">
+                        <span class="add-day control-label col-md-3 input-small row-left">原石编码：</span>
+
+                        <div class="col-md-9">
+                            <input id="stone_number" name="number" type="text" placeholder="原石编码"
+                                   class="form-control input-medium row-right" value=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="add-day control-label col-md-3 input-small row-left">原石类型：</span>
+
+                    <div class="col-md-9">
+                        <input id="stone_cate" name="code_name" type="text" placeholder="原石类型"
+                               class="form-control input-medium row-right" value=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="add-day control-label col-md-3 input-small row-left">原石描述：</span>
+
+                    <div class="col-md-9">
+                        <textarea id='stone_info' name="info" placeholder="原石描述"
+                                  class="form-control input-medium row-right"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="add-day control-label col-md-3 input-small row-left">原石选择：</span>
+
+                    <div class="col-md-9">
+                        <a id="stone-select" class="btn btn-default row-right" href="#" data-toggle="modal"
+                           data-target="#listModal">原石选择</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="add-day control-label col-md-3 input-small row-left">图片：</span>
+
+                    <div class="col-md-9" id="img-pane" style="margin-left: -15px;">
+                        <div class="img-preview">
+                            <img src="" alt="预览图片"/>
+                            <a href="javascript:;" class="delete">删除</a>
+                        </div>
+                        <div class="file-add">+</div>
+                        <input type="file" class="file-hidden" name="picture_url"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="add-day control-label col-md-3 input-small row-left">排序位置：</span>
+
+                    <div class="col-md-9">
+                        <input name="rank" type="text" placeholder="排序位置" class="form-control input-medium row-right"
+                               value=""/>
+                    </div>
+                </div>
+                <div class="form-actions fluid">
+                    <div class="form-group row-left-margin">
+                        <input type="hidden" id="stone_id" name="stone_id"/>
+                        <button id="submit" type="submit" class="btn default">确定</button>
+                        <button type="button" class="btn default button-left" onclick="history.back()">取消</button>
+                    </div>
+                </div>
+                <!-- END FORM-->
+            </form>
+        </div>
+    </div>
+</div>
+<div id="listModal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">原石选择</h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix">
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <label for="coding" class="col-xs-4 control-label">原石编码</label>
+
+                            <div class="col-xs-8">
+                                <input type="text" id="coding" class="form-control" placeholder="编码">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <label class="col-xs-4 control-label">原石类型</label>
+
+                            <div class="col-xs-8">
+                                <label>
+                                    <select id="type" name="select">
+                                        <option value="0">所有类别</option>
+                                        <option value="1">白玉</option>
+                                        <option value="2">翡翠</option>
+                                        <option value="3">鸡血石</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <input type="button" id="modal-select" value="检索" class="btn btn-primary"/>
+                    </div>
+                </div>
+                <table id="table-stone" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>选择</th>
+                        <th>序号</th>
+                        <th>原石编码</th>
+                        <th>原石类型</th>
+                        <th>原石描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <nav>
+                    <ul id="pager" class="pager" data-currpage="1">
+                        <li class="disabled"><a class="previous" href="javascript:;">上一页</a></li>
+                        <li><a class="next" href="javascript:;">下一页</a></li>
+                    </ul>
+                </nav>
+                <div class="clearfix text-right">
+                    当前页:<span id="curr-page">1</span>/总页数: <span id="total-page">1</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="sure" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- end 真正的内容区-->
+<?php $this->load->view('common/bottom'); ?>
+<script id="listTpl" type="x-tmpl-mustache">
+
+
+{{#items}}
+<tr>
+<td><input type="radio" data-id="{{stone_id}}" data-number="{{number}}" data-code_name="{{code_name}}" data-title="{{title}}" name="select"/></td>
+<td>{{stone_id}}</td>
+<td>{{number}}</td>
+<td>{{code_name}}</td>
+<td>{{title}}</td>
+</tr>
+{{/items}}
+
+</script>
+<script>
+    $(function () {
+        /**
+         * 单文件上传前端效果处理
+         */
+        $("#img-pane").on("click", ".file-add", function () {
+            var $this = $(this);
+            $this.siblings("[type='file']").trigger("click");
+        }).on("change", "[type='file']", function () {
+            var $this = $(this);
+            var objUrl = getObjectURL(this.files[0]);
+            $this.parent().find("img").attr("src", objUrl);
+            $this.siblings(".file-add").hide().end().siblings(".img-preview").show();
+
+        }).on("click",".delete", function () {
+            var $this=$(this);
+            $this.parent().hide().next().show();
+            var $file=$this.closest("#img-pane").find("[type='file']");
+            $file.after($file.clone().val(""));
+            $file.remove();
+        });
+
+        //建立一个可存取到该file的url
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) { // basic
+                url = window.createObjectURL(file);
+            } else if (window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+
+        $("#stone-select,#modal-select").on("click", function () {
+            var $table = $("#table-stone");
+            var coding, type;
+            if ($(this).attr("id") == "stone-select" && $("tbody", $table).children("tr").length) {
+                return;
+            } else {
+                coding = $("#coding").val();
+                type = $("#type").val();
+                $.ajax({
+                    dataType: "json",
+                    url: "/home/stone_api",
+                    data: {page: 1, coding: coding, type: type},
+                    success: function (json) {
+                        var data = json.data.data;
+                        var maxpage = json.data.maxpage;
+                        $("#total-page").text(maxpage);
+                        $("#pager").data("currpage", 1);
+                        if (data && Array.isArray(data) && data.length) {
+                            var tpl = $("#listTpl").html();
+                            Mustache.parse(tpl);
+                            var render = Mustache.render(tpl, {"items": data});
+                            $("tbody", $table).html(render);
+                            if (maxpage == 1) {
+                                $("#pager").children().addClass("disabled");
+                            } else {
+                                $("#pager").children().eq(0).addClass("disabled");
+                                $("#pager").children().eq(1).removeClass("disabled");
+                            }
+                        } else {
+                            $("#pager").children().addClass("disabled");
+                            $("<div>没有原石</div>").insertAfter("tbody", $table);
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#pager").on("click", ".previous,.next", function () {
+            var $this = $(this);
+            if ($this.parent().hasClass("disabled")) {
+                return;
+            }
+            var $table = $("#table-stone");
+            var coding = $("#coding").val();
+            var type = $("#type").val();
+            var page;
+            var $pager = $("#pager");
+            var $previous = $pager.children().eq(0);
+            var $next = $pager.children().eq(1);
+            if ($this.attr("class") == "previous") {
+                page = $("#pager").data("currpage") - 1;
+                $next.removeClass("disabled");
+            } else {
+                page = $("#pager").data("currpage") + 1;
+                $previous.removeClass("disabled");
+            }
+            $.ajax({
+                dataType: "json",
+                url: "/home/stone_api",
+                data: {page: page, coding: coding, type: type},
+                success: function (json) {
+                    var data = json.data.data;
+                    var maxpage = json.data.maxpage;
+                    if (data && Array.isArray(data) && data.length) {
+                        var tpl = $("#listTpl").html();
+                        Mustache.parse(tpl);
+                        var render = Mustache.render(tpl, {"items": data});
+                        $("tbody", $table).html(render);
+                        if (page == maxpage) {
+                            $next.addClass("disabled");
+                        }
+                        if (page == 1) {
+                            $previous.addClass("disabled");
+                        }
+                        $pager.data("currpage", page);
+                        $("#curr-page").text(page);
+                    }
+                }
+            });
+        });
+
+        $("#sure").on("click", function () {
+            var $radio = $("#table-stone>tbody>tr").find("[type='radio']:checked");
+            var len = $radio.length;
+            if (!len) {
+                alert("请选择原石");
+            } else {
+                $("#stone_id").val($radio.data("id"));
+                $("#stone_cate").val($radio.data("code_name"));
+                $("#stone_info").val($radio.data("title"));
+                $("#stone_number").val($radio.data("number"));
+                $("#listModal").modal("hide");
+            }
+        });
+    });
+</script>
+
+
