@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>zepto touch</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        *, *:before, *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .delete {
+            display: none;
+            float: right;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul > li {
+            font-size: 16px;
+            line-height: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<ul id="items">
+    <li>List item 1 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+    <li>List item 2 <span class="delete">&times;</span></li>
+</ul>
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../src/zepto.js"></script>
+<script src="../src/event.js"></script>
+<script src="../src/touch.js"></script>
+<script>
+    $(function () {
+        alert("jquery");
+    });
+    Zepto(function ($) {
+// show delete buttons on swipe
+        /*$('#items li').swipe(function () {
+         alert("ttt");
+         $('.delete').hide();
+         $('.delete', this).show();
+         });*/
+        $('#items li').on("swipeLeft", function () {
+            $('.delete').hide();
+            $('.delete', this).show();
+        }).on("swipeRight", function () {
+            $('.delete', this).hide();
+        }).on("longTap", function () {
+            $(this).css({
+                backgroundColor: "#eee"
+            });
+        });
+        $(document).on("swipeUp", function (e) {
+            //alert("swipeUp");
+            var windowHeight = $(window).height();
+            var scrollTop = $(window).scrollTop();
+            var documentHeight = $(document).height();
+            if (windowHeight + scrollTop >= documentHeight) {
+                alert("已经到页面底部了亲");
+            }
+        }).on("swipeDown", function (e) {
+            alert("swipeDown");
+        });
+
+        // delete row on tapping delete button
+        $('.delete').tap(function (e) {
+            $(this).parent('li').remove()
+            //alert($(e.target).html());
+        });
+
+        /*$.each([1,2,3], function (index,item) {
+         alert(item);
+         })*/
+    });
+
+</script>
+</body>
+</html>
