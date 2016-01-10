@@ -1,0 +1,26 @@
+<script src="/js/plugin/sea.js"></script>
+<script>
+    seajs.config({
+        base: "/js/",
+        alias: {
+            "jquery": "plugin/jquery.js",
+            "home": "page/home.js",
+            "bootstrap": "plugin/bootstrap.min.js",
+            "mustache": "plugin/mustache.min.js",
+            "swiper": "plugin/swiper.min.js",
+            //"tap": "common/tap.js",
+            "store": "common/store.js",
+            "paging": "common/paging.js"
+        },
+        map: [
+            [/^(.*\/js\/.*\.(?:css|js))(?:.*)$/i, '$1?v=201601101539']
+        ]
+    });
+    seajs.use(['jquery', 'home'], function ($, home) {
+        $(document).ready(function () {
+            var homeob = new home();
+            homeob.init();
+            homeob.time("<?php echo time(); ?>");
+        });
+    });
+</script>

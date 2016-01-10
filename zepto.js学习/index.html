@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zepto.js</title>
+</head>
+<body>
+<div class="container">
+    <div class="container-item"></div>
+    <div class="container-item"></div>
+    <div class="container-item">
+        <div class="container-item-info">
+
+        </div>
+    </div>
+    <ul>
+        <li>list item 1</li>
+        <li>list item 2</li>
+        <li>list item 3</li>
+    </ul>
+
+</div>
+<script src="js/zepto.js-1.1.6.js"></script>
+<script>
+    Zepto(function ($) {
+        $('li').add('p').css('background-color', 'red');
+        $.extend($.fn,{
+            foo: function () {
+                return "testfoo";
+            }
+        });
+        //alert($.fn.constructor===Zepto);
+        $("<span>zeptojs</span>",{class:"zepto"}).css({display:"block",color:"red","background-color":"green"}).appendTo("body");
+       console.log($.camelCase("cass-uu-ii-ooo"));
+        console.log($.contains(document.querySelector(".container"),document.querySelector(".container-item-info")));
+        $.each(["a","b"], function (index,item) {
+            console.log(index+item);
+        });
+        var default1={
+            a:"1",
+            b:"2"
+        }
+        $.extend(default1,{a:"3"});
+        console.log(default1);
+       var ary= $.grep([1,2,3,4], function (item) {
+            return item>=3;
+        });
+        console.log(ary);
+        var func= function () {
+
+        };
+        console.log($.isFunction(func));
+
+        $.isPlainObject({})         // => true
+        $.isPlainObject(new Object) // => true
+        $.isPlainObject(new Date)   // => false
+        $.isPlainObject(window);
+
+
+       var map1= $.map([1,2,3,4,5],function(item,index){
+            if(item>1){return item*item;}
+        });
+// =>[4, 9, 16, 25]
+
+       var map2= $.map({"yao":1,"tai":2,"yang":3},function(item,index){
+            if(item>1){return item*item;}
+        });
+// =>[4, 9]
+
+        console.log(map1);
+        console.log(map2);
+        var json=JSON.parse('{"yao":1,"tai":2,"yang":3}');
+        console.log(json.yao);
+        console.log(new Date().toJSON());
+        console.log(json);
+        console.log(JSON.stringify(json));
+
+        console.log($(".container").offset());
+        console.log($(".container").size());
+
+//        console.log($("body").pluck("div"));
+    });
+</script>
+</body>
+</html>
