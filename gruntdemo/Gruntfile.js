@@ -1,5 +1,5 @@
 module.exports = function (grunt) {
-  // ÏîÄ¿ÅäÖÃ
+  // é¡¹ç›®é…ç½®
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
@@ -12,8 +12,8 @@ module.exports = function (grunt) {
       }
     }
   });
-  // ¼ÓÔØÌá¹©"uglify"ÈÎÎñµÄ²å¼ş
+  // åŠ è½½æä¾›"uglify"ä»»åŠ¡çš„æ’ä»¶
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  // Ä¬ÈÏÈÎÎñ
+  // é»˜è®¤ä»»åŠ¡
   grunt.registerTask('default', ['uglify']);
 }
