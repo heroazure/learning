@@ -1,15 +1,1 @@
-/.idea/*
-app/www/logs/*
-/app/www/config/development/database.php
-
-/app/www/config/production/database.php
-/app/www/config/production/config.php
-/app/admin/config/production/database.php
-/app/admin/config/production/config.php
-
-/app/www/config/testing/database.php
-/app/admin/config/testing/database.php
-
-html/admin/ueditor/
-*.swp
-*.swo
+.idea/*
