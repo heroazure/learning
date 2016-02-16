@@ -1,0 +1,7 @@
+1、下载安装ruby
+2、下载RubyGems压缩包
+http://www.oschina.net/p/rubygems/
+http://www.oschina.net/news/19237/rubygems-v-185
+3、解压RubyGems压缩包并进入根目录
+执行>>ruby setup.rb
+4、随便路径下执行>>gem install jekyll
