@@ -2,13 +2,111 @@
 
 .box-shadow(@style, @c) when (iscolor(@c)) {
   -webkit-box-shadow: @style @c;
-  box-shadow:         @style @c;
+  box-shadow: @style @c;
 }
+
 .box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
   .box-shadow(@style, rgba(0, 0, 0, @alpha));
 }
+
 .box {
   color: saturate(@base, 5%);
   border-color: lighten(@base, 30%);
-  div { .box-shadow(0 0 5px, 30%) }
+  div {
+    .box-shadow(0 0 5px, 30%)
+  }
+}
+
+p, a, ul, li {
+  border-top: 2px dotted #366;
+  & + & {
+    border-top: 0;
+  }
+}
+
+.header {
+  .menu {
+    border-radius: 5px;
+    .no-borderradius & {
+      background-image: url('../img/wait.jpg');
+    }
+  }
+}
+
+.grand {
+  .parent {
+    & > & {
+      color: red;
+    }
+
+    & & {
+      color: green;
+    }
+
+    && {
+      color: blue;
+    }
+
+    &, &ish {
+      color: cyan;
+    }
+  }
+}
+
+.link {
+  color: #000;
+  & + & {
+    color: red;
+  }
+
+  & & {
+    color: green;
+  }
+
+  && {
+    color: blue;
+  }
+
+  &, &ish {
+    color: cyan;
+  }
+  & > .ll {
+    font-size: 2rem;
+  }
+}
+
+.button {
+  &-ok {
+    background-image: url("../img/wait.jpg");
+  }
+  &-cancel {
+    background-image: url("../img/wait.jpg");
+  }
+
+  &-custom {
+    background-image: url("../img/wait.jpg");
+  }
+}
+
+.clearfix {
+  display: block;
+  zoom: 1;
+
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+.uuu{
+  @base: 5%;
+  @filler: @base * 2;
+  @other: @base + @filler;
+  color: #888 / 4;
+  background-color: #111;
+  height: 100% / 2 + @filler;
 }
