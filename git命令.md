@@ -1,10 +1,31 @@
-É¾³ýÔ¶³Ì·ÖÖ§ºÍtag
+åˆ é™¤è¿œç¨‹åˆ†æ”¯å’Œtag
 >>git push origin --delete <branchName>
 >>git push origin --delete tag <tagname>
 
-cloneÔ¶³ÌÖ¸¶¨·ÖÖ§
+cloneè¿œç¨‹æŒ‡å®šåˆ†æ”¯
 >>git clone -b <branchName> <server>
 
-¸ù¾ÝÔ¶³Ì·ÖÖ§´´½¨±¾µØ·ÖÖ§
+æ ¹æ®è¿œç¨‹åˆ†æ”¯åˆ›å»ºæœ¬åœ°åˆ†æ”¯
 >>git fetch
 >>git checkout -b localBranch origin/remoteBranch
+æˆ–è€…ä»¥ä¸‹æ–¹å¼:
+>>git fetch origin
+>>git checkout branchName
+ç¤ºä¾‹
+{
+cd repository
+git fetch origin
+remote: Counting objects: 92, done.
+remote: Compressing objects: 100% (63/63), done.
+remote: Total 68 (delta 41), reused 0 (delta 0)
+Unpacking objects: 100% (68/68), done.
+From https://github.com/user/repo.git
+ * [new branch]      gh-pages     -> origin/gh-pages
+
+git checkout gh-pages
+Branch gh-pages set up to track remote branch gh-pages from origin.
+Switched to a new branch 'gh-pages'
+}
+
+åˆ é™¤gitç®¡ç†æ–‡ä»¶
+>>git rm .idea/* -r
