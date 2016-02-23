@@ -1,21 +1,21 @@
-1¡¢Ê×ÏÈ°²×°×îĞÂµÄnode.js(×Ô´øÁËnpm)
-2¡¢È«¾Ö°²×°grunt-cli
+1ã€é¦–å…ˆå®‰è£…æœ€æ–°çš„node.js(è‡ªå¸¦äº†npm)
+2ã€å…¨å±€å®‰è£…grunt-cli
 >>npm install grunt-cli -g
-3¡¢cdµ½ÏîÄ¿¸ùÄ¿Â¼
-3.1¡¢ÒÑÓĞpackage.jsonÎÄ¼şµÄÇé¿öÖ´ĞĞ:
+3ã€cdåˆ°é¡¹ç›®æ ¹ç›®å½•
+3.1ã€å·²æœ‰package.jsonæ–‡ä»¶çš„æƒ…å†µæ‰§è¡Œ:
 >>npm install
-3.2¡¢Ã»ÓĞpackage.jsonÎÄ¼şµÄÇé¿ö¿ÉÒÔÖ´ĞĞ(°´ÕÕÆÁÄ»ÌáÊ¾»Ø´ğËùĞèÄ£¿éµÄÃû³ÆºÍ°æ±¾¼´¿É):
+3.2ã€æ²¡æœ‰package.jsonæ–‡ä»¶çš„æƒ…å†µå¯ä»¥æ‰§è¡Œ(æŒ‰ç…§å±å¹•æç¤ºå›ç­”æ‰€éœ€æ¨¡å—çš„åç§°å’Œç‰ˆæœ¬å³å¯):
 >>npm init
-È»ºóÍ¨¹ıpackage.jsonÎÄ¼şÅäÖÃdevDependenciesÊôĞÔ»òÕßÖ´ĞĞ:
->>npm install <module> --save-dev(¼ÇµÃ×îÏÈ°²×°gruntÄ£¿é£¬--save-dev»á×Ô¶¯½«Ä£¿éÃû/°æ±¾¼ÓÈëpackage.jsonÎÄ¼ş)
-Ê¾Àı:
+ç„¶åé€šè¿‡package.jsonæ–‡ä»¶é…ç½®devDependencieså±æ€§æˆ–è€…æ‰§è¡Œ:
+>>npm install <module> --save-dev(è®°å¾—æœ€å…ˆå®‰è£…gruntæ¨¡å—ï¼Œ--save-devä¼šè‡ªåŠ¨å°†æ¨¡å—å/ç‰ˆæœ¬åŠ å…¥package.jsonæ–‡ä»¶)
+ç¤ºä¾‹:
 npm install grunt --save-dev
 npm install grunt-contrib-jshint --save-dev
 npm install grunt-contrib-concat --save-dev
 npm install grunt-contrib-uglify --save-dev
 npm install grunt-contrib-watch --save-dev
-4¡¢Ö´ĞĞÄ£¿éÈÎÎñ
-4.1¡¢Ä¬ÈÏÈÎÎñÏÂÄ³¸öÄ£¿é
+4ã€æ‰§è¡Œæ¨¡å—ä»»åŠ¡
+4.1ã€é»˜è®¤ä»»åŠ¡ä¸‹æŸä¸ªæ¨¡å—
 >>grunt <moduleName>
-4.2¡¢Ö´ĞĞÄ³¸öÈÎÎñ
+4.2ã€æ‰§è¡ŒæŸä¸ªä»»åŠ¡
 >>grunt <taskName>
