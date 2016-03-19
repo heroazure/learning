@@ -5,11 +5,12 @@
     // ======================
 
     var HxNumber = function (el, options) {
+        this.$el=$(el)
         this.$minus = $(el).find('.js-minus')
         this.$plus = $(el).find('.js-plus')
         this.$input = $(el).find('.js-input')
         this.options = $.extend({}, HxNumber.DEFAULTS, options)
-        this.remaind = 10
+        this.remaind = this.options.max
         $(el).on('click', '.js-plus', $.proxy(this.plus, this))
         $(el).on('click', '.js-minus', $.proxy(this.minus, this))
         $(el).on('keyup', '.js-input', $.proxy(this.input, this))
@@ -20,7 +21,9 @@
 
     HxNumber.VERSION = '1.0.0'
 
-    HxNumber.DEFAULTS = {}
+    HxNumber.DEFAULTS = {
+        max:10
+    }
 
     HxNumber.prototype.plus = function (e) {
         var that = this
@@ -32,6 +35,7 @@
             that.$plus.prop("disabled", true);
         }
         that.$input.val(num);
+        that.$el.trigger('end.hx.number',num)
         e.preventDefault();
     }
 
@@ -45,6 +49,7 @@
             that.$minus.prop("disabled", true)
         }
         that.$input.val(num);
+        that.$el.trigger('end.hx.number',num)
         e.preventDefault();
     }
 
@@ -77,10 +82,11 @@
                 }
             }
         }
+        that.$el.trigger('end.hx.number',that.$input.val())
     }
 
     HxNumber.prototype.blur = function () {
-        var that=this
+        var that = this
         if (that.$input.val() == "") {
             that.$input.val("1");
             that.$minus.prop("disabled", true);
@@ -90,11 +96,13 @@
                 that.$plus.removeAttr("disabled");
             }
         }
+        that.$el.trigger('end.hx.number',num)
     }
 
     HxNumber.prototype.refresh = function () {
-        var that = this
-        if (!parseInt(that.$input.val())) {
+        var that = this,
+            val = parseInt(that.$input.val())
+        if (!val) {
             that.$input.val("1");
             that.$minus.prop("disabled", true);
             if (that.remaind <= 1) {
@@ -104,6 +112,7 @@
             }
             return false
         }
+        that.$input.val(val)
         return true
     }
 
@@ -142,11 +151,11 @@
     //$(document).on('click.hx.number.data-api', dismiss, HxNumber.prototype.close)
     $(window).on('load', function () {
         /*$('[data-number="hxnumber"]').each(function () {
-            var $hxnumber = $(this)
-            Plugin.call($hxnumber, $hxnumber.data())
-        })*/
+         var $hxnumber = $(this)
+         Plugin.call($hxnumber, $hxnumber.data())
+         })*/
         var $hxnumber = $('[data-number="hxnumber"]')
-        Plugin.call($hxnumber,$hxnumber.data())
+        Plugin.call($hxnumber, $hxnumber.data())
     })
 
 }(jQuery);
