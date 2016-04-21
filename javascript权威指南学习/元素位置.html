@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<article>
+
+    <p>This demonstration illustrates how to use the HTML5 mouse wheel event. Hover your cursor over the image then
+        scroll your mouse wheel…</p>
+
+    <img style="width: 260px;" id="squirrel" src="squirrel.jpg" alt="a squirrel">
+
+    <p>For further information, please refer to the article <a
+            href="http://www.sitepoint.com/html5-javascript-mouse-wheel/"><strong>How to Use the HTML5 Mouse Wheel
+        Event</strong></a>…</p>
+
+    <p>This example code was developed by <a href="http://twitter.com/craigbuckler">Craig Buckler</a> of <a
+            href="http://optimalworks.net/">OptimalWorks.net</a> for <a href="http://sitepoint.com/">SitePoint.com</a>.
+    </p>
+
+    <p>Please view the source and use this code as you wish. A link back to the article is appreciated.</p>
+
+</article>
+
+<div id="test">
+    testtesttesttest
+</div>
+<script>
+   var c= document.querySelector('#test').getBoundingClientRect()
+    alert(c.width)
+</script>
+</body>
+</html>
