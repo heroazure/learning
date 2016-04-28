@@ -1,5 +1,6 @@
 /**
  * Created by xiaolijun on 2016/1/4.
+ * 兼容cmd模块也可普通方式script标签页面引入
  */
 (function (window, undefined) {
     (function () {
@@ -8,7 +9,8 @@
         function Page(optional) {
             if (!(this instanceof Page)) return new Page(optional);
             this.opt = optional || {}
-            this.callLoad = true //避免快速滚动加载多次重复数据
+            this.canLoad = true //避免快速滚动加载多次重复数据
+            this.opt.$loadMore.on('click',Page.prototype.handle)
         }
 
         Page.prototype.handle = function () {
@@ -22,7 +24,7 @@
         function paging(optional) {
 
             var that = this,
-                callLoad = that.callLoad;
+                canLoad = that.canLoad;
 
             optional = optional || {};
             //简单起见，以$开头命名的属性都为jquery对象
@@ -56,12 +58,12 @@
                 url: opt.url,
                 data: opt.data,
                 beforeSend: function (xhr) {
-                    if (!callLoad) {//避免快速滚动加载多次重复数据
+                    if (!canLoad) {//避免快速滚动加载多次重复数据
                         return false;
                     }
-                    callLoad = false;
+                    canLoad = false;
                     if (that.maxpage != "undefined" && that.maxpage < opt.page) {//非第一次加载并且请求的页码大于最大页数，不发送ajax请求
-                        callLoad = true;
+                        canLoad = true;
                         return false;
                     } else {
                         opt.$loadMore.text("正在加载中...");
@@ -106,7 +108,7 @@
                     }
                 },
                 complete: function () {
-                    callLoad = true;
+                    canLoad = true;
                 }
             });
         }
