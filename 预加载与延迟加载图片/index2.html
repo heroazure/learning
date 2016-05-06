@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延迟加载</title>
+</head>
+<body>
+<img data-layzr="../img/fc-cate.jpg" />
+<img data-layzr="../img/hty-cate.jpg" />
+<img data-layzr="../img/jxs-cate.jpg" />
+<img data-layzr="../img/overlay-bg.jpg" />
+<img data-layzr="../img/temp1.png" />
+<img data-layzr="../img/temp4.jpg" />
+<img data-layzr="../img/test1.jpg" />
+<img data-layzr="../img/wait.jpg" />
+<script src="layzr.min.js"></script>
+<script>
+    var layzr = new Layzr({
+
+        attr: 'data-layzr',
+
+        retinaAttr: 'data-layzr-retina',
+
+        threshold: 0,
+
+        callback: null
+
+    });
+</script>
+</body>
+</html>
