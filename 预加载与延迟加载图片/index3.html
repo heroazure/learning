@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延迟加载jquery.lazyload.js</title>
+</head>
+<body style="padding-top: 1500px;">
+<img class="lazy" data-original="../img/fc-cate.jpg" >
+<img class="lazy" data-original="../img/hty-cate.jpg" >
+<img class="lazy" data-original="../img/jxs-cate.jpg" >
+<img class="lazy" data-original="../img/overlay-bg.jpg">
+<img class="lazy" data-original="../img/temp1.png" width="640" height="480">
+<img class="lazy" data-original="../img/temp4.jpg" width="640" height="480">
+<img class="lazy" data-original="../img/test1.jpg" width="640" height="480">
+<img class="lazy" data-original="../img/wait.jpg" width="640" height="480">
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/jquery.lazyload.min.js"></script>
+<script>
+    $("img.lazy").lazyload();
+</script>
+</body>
+</html>

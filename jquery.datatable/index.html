@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery.datatables.js</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <!--<script src="jquery.dataTables.min.js"></script>-->
+</head>
+<body>
+
+<table id="table1" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Office</th>
+        <th>Extn.</th>
+        <th>Start date</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script>
+    /*$(function () {
+        $("#table1").dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "data.json",
+            "oLanguage" : { // 汉化
+                "sUrl" : "chinese.txt"
+            },
+            "aLengthMenu": [
+                [5, 10, 15, -1],
+                [5, 10, 15, "All"] // change per page values here
+            ],
+            "iDisplayLength": 5,
+            "bPaginate" : true
+        })
+    })*/
+    var dtable;
+    function doSearch() {
+        if(dtable!=null){
+            dtable.fnClearTable(0);
+            dtable.fnDraw(); //重新加载数据
+        }else{
+            dtable = $("#table1").dataTable({
+                "oLanguage" : { // 汉化
+                    "sUrl" : "chinese.txt"
+                },
+                "bStateSave" : true,
+                "bJQueryUI" : false,
+                "bPaginate" : true,// 分页按钮
+                "bFilter" : true,// 搜索栏
+                "bLengthChange" : true,// 每行显示记录数
+                "iDisplayLength" : 10,// 每页显示行数
+                "bSort" : false,// 排序
+                "bInfo" : true,// Showing 1 to 10 of 23 entries 总记录数没也显示多少等信息
+                "bWidth" : true,
+                "bScrollCollapse" : true,
+                "sPaginationType" : "full_numbers", // 分页，一共两种样式 另一种为two_button // 是datatables默认
+                "bProcessing" : true,
+                "bServerSide" : true,
+                "bDestroy" : true,
+                "bSortCellsTop" : true,
+                "sAjaxSource" : "data.json",
+//                "sScrollY": "100%",
+                "fnInitComplete": function() {
+//                    this.fnAdjustColumnSizing(true);
+                },
+                "fnServerParams" : function(aoData) {
+                    aoData.push({
+                        "name" : "11",
+                        "value" : '22'
+                    });
+                },
+                /*"aoColumns" : [
+                    {"mData" : "Name"},
+                    {"mData" : "Position"},
+                    {"mData" : "Office"},
+                    {"mData" : "Extn"},
+                    {"mData" : "Start date"},
+                    {"mData" : "Salary"} ],*/
+                "aoColumnDefs":[
+                    /*{
+                        "sClass":"center",
+                        "aTargets":[6],
+                        "mData":"statCleanRevampId",
+                        "mRender":function(a,b,c,d){//a表示statCleanRevampId对应的值，c表示当前记录行对象
+                            return '<a href=\"javascript:void(0);\" onclick=\"del('+a+')\">删除</a>'
+                                    + '<a href=\"javascript:void(0);\" onclick=\"editForm('+c.statCleanRevampId+','+c.statCleanId+','
+                                    +c.revampOrgan+',\''+c.statName+'\',\''+c.problemDes+'\')\">编辑</a>'
+                                    + ' <a href=\"javascript:void(0);\" onclick=\"check('+a+',1)\">审核通过</a>'
+                                    + ' <a href=\"javascript:void(0);\" onclick=\"check('+a+',2)\">审核不通过</a>';
+                        }
+                    },//隐藏列Index=0，1，2的三列*/
+                    { "bSearchable": false, "bVisible": false, "aTargets": [ 2 ] }
+                ],
+                "fnRowCallback" : function(nRow, aData, iDisplayIndex) {//相当于对字段格式化
+                    /*if (aData["revampStatus"] == 0) {
+                        $('td:eq(5)', nRow).html("结束");
+                    } else if (aData["revampStatus"] == 1) {
+                        $('td:eq(5)', nRow).html("进行中");
+                    } else if (aData["revampStatus"] == 2) {
+                        $('td:eq(5)', nRow).html("完成");
+                    } else if (aData["revampStatus"] == 3) {
+                        $('td:eq(5)', nRow).html("驳回");
+                    }*/
+                },
+                "fnServerData" : function(sSource, aoData, fnCallback) {
+                    $.ajax({
+                        "type" : 'get',
+                        "url" : sSource,
+                        "dataType" : "json",
+                        "data" : {
+                            aoData : JSON.stringify(aoData)
+                        },
+                        "success" : function(resp) {
+                            fnCallback(resp);
+                        }
+                    });
+                }
+            });
+        }}
+    doSearch();
+</script>
+</body>
+</html>
