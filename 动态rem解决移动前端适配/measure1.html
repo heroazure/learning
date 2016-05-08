@@ -68,7 +68,7 @@
                     recalc = function () {
                         var clientWidth = docEl.clientWidth;
                         if (!clientWidth) return;
-                        docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';//假设这里就是以iphone 5为例
+                        docEl.style.fontSize = 16 * (clientWidth / 375) + 'px';//假设这里就是以iphone 6为例
                     };
 
             if (!doc.addEventListener) return;

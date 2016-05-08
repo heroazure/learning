@@ -16,6 +16,14 @@
     $('#hx-number').on('end.hx.number', function () {
         alert('end.hx.number')
     })
+    var a=2,
+            func=(function(){
+                var a=3
+                return function(){
+                    a++;
+                    console.log(a)
+                }
+            });
 </script>
 </body>
 </html>
