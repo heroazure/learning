@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h-comp1></h-comp1>
+    <hr/>
+    <v-parent1></v-parent1>
+    <hr/>
+    <h-parent2></h-parent2>
+    <hr/>
+    <span>{{msg}}</span>
+    <h-child2  :msg2="pmsg2"></h-child2>
+</div>
+<hr/>
+<div id="custom-event">
+    <span>消息:{{messages|json}}</span>
+    <h-child4 @child-patch="handleIt" v-ref:child4>
+        <div slot="slot1">具名slot1</div>
+        <div>我是不具名slot</div>
+    </h-child4>
+</div>
+<template id="temp1">
+    <input type="text" v-model="msg"/>
+    <button type="button" @click="notify">确定</button>
+    <slot></slot>
+    <slot name="slot1"></slot>
+</template>
+<style>
+    .fade-transition {
+        transition: opacity .3s ease;
+    }
+    .fade-enter, .fade-leave {
+        opacity: 0;
+    }
+</style>
+<div id="dynamic">
+    <component :is="currentView" transition="fade" transition-mode="out-in" keep-alive>
+    </component>
+</div>
+
+<hr/>
+<style>
+    /* 必需 */
+    .expand-transition {
+        transition: all .3s ease;
+        height: 30px;
+        padding: 10px;
+        background-color: #eee;
+        overflow: hidden;
+    }
+
+    /* .expand-enter 定义进入的开始状态 */
+    /* .expand-leave 定义离开的结束状态 */
+    .expand-enter, .expand-leave {
+        height: 0;
+        padding: 0 10px;
+        opacity: 0;
+    }
+</style>
+<div id="transition">
+    <div v-if="show" transition="expand">醉了</div>
+    <button type="button" @click="click1">toggle</button>
+</div>
+
+<div id="forms">
+    <input type="checkbox" id="jack" value="Jack1" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John1" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike1" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames | json }}</span>
+    <br/>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+</div>
+<script src="index.js"></script>
+<script>
+    index.component()
+    index.transition()
+    index.forms()
+</script>
+</body>
+</html>
