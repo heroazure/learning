@@ -14,5 +14,8 @@ module.exports={
                 test:/\.css$/, loader: 'style!css'
             }
         ]
-    }
+    },
+    plugins:[
+        new webpack.BannerPlugin('创建by heroxiao')
+    ]
 }
