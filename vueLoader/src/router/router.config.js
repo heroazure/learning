@@ -7,14 +7,25 @@ var router = new VueRouter({
     linkActiveClass: 'active'//当前激活的路由链接（包括父级链接）自动添加的class
 })
 router.map({
+    '/':{
+        component: function (resolve) {
+            require(['../components/tab1.vue'],resolve)
+        }
+    },
     '/tab1':{
-        component:require('../components/tab1.vue')
+        component:function (resolve) {
+            require(['../components/tab1.vue'],resolve)
+        }
     },
     '/tab2':{
-        component:require('../components/tab2.vue')
+        component:function (resolve) {
+            require(['../components/tab2.vue'],resolve)
+        }
     },
     '/tab3':{
-        component:require('../components/tab3.vue')
+        component:function (resolve) {
+            require(['../components/tab3.vue'],resolve)
+        }
     }
 })
 router.redirect({

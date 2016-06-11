@@ -1,0 +1,73 @@
+/*! 创建by heroxiao */
+.tab1{
+  font-size: 20px;
+  color: #ff0000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tab2{
+    color: #00ff00;
+    border: 1px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tab3{
+    color: #0000ff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.menus{
+    list-style: none;
+}
+.menus>li{
+    float: left;
+    cursor: pointer;
+}

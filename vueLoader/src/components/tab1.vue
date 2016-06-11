@@ -14,8 +14,4 @@
     }
 </script>
 
-<style>
-    .tab1{
-        color: #ff0000;
-    }
-</style>
+<style src="../less/tab1.less"></style>

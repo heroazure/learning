@@ -7,4 +7,4 @@ var router=require('./router/router.config.js')
 var app=require('./components/app.vue')
 
 Vue.use(vueResource)
-router.start(app,'v-app')
+router.start(app,'#app')

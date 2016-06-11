@@ -10,7 +10,11 @@
 </template>
 <script>
 module.exports={
-
+    data: function () {
+        return{
+            msg:'tab1'
+        }
+    }
 }
 </script>
 
