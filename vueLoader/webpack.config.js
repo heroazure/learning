@@ -5,7 +5,7 @@ var webpack=require('webpack')
 var path=require('path')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports={
-    watch:true,
+    //watch:true,
     entry:'./src/app.js',
     output:{
         path:path.join(__dirname,'dist/'),
@@ -40,14 +40,14 @@ module.exports={
             loader: 'babel'
         },{
             test: /\.less$/,
-            loader: "style!css!postcss!less"
+            loader: "css!postcss!less"
         },{
             test: /\.scss$/,
             loader: "style!css!postcss!sass"
         },{
             test: /\.css$/,
             //include:[path.join(__dirname,'Develop/')],
-            loader: "style!css!postcss"
+            loader: "style!css"
         },{
             test: /\.css$/,
             include: /node_modules/,
@@ -75,7 +75,7 @@ module.exports={
         },
         loaders: {
             js: 'babel',
-            css: ExtractTextPlugin.extract('css'),
+            css: ExtractTextPlugin.extract('css!less'),
             less:ExtractTextPlugin.extract('css!postcss!less'),
             scss:ExtractTextPlugin.extract('css!postcss!sass')
         }
