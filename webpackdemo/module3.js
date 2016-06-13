@@ -4,5 +4,7 @@
 define(function (require, exports, module) {
     'use strict';
 
-    module.exports='模块导出'
+    document.write('module3.js<br />')
+
+    module.exports = '模块导出module3'
 })
