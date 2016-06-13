@@ -28,7 +28,7 @@ module.exports={
             module1 : 'module1.js',//后续直接 require('module1') 即可
             module2 : 'module2.js',//后续直接 require('module1') 即可
             module3 : 'module3.js',//后续直接 require('module1') 即可
-            paginate : 'vue-paginate.min.js'//后续直接 require('module1') 即可
+            paginate : 'vue-paginate.js'//后续直接 require('module1') 即可
         }
     }
 }

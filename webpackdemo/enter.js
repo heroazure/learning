@@ -6,9 +6,11 @@
 require('./style.css')
 var Vue = require('./vue.js')
 //import Vue from './vue.js';
-/*var VuePaginate = require('paginate')
-Vue.use(VuePaginate)*/
-Vue.use(require('./vue-resource.js'))
+var VuePaginate = require('./vue-paginate.min.js')
+alert(VuePaginate)
+Vue.use(VuePaginate)
+var res=require('./vue-resource.js')
+Vue.use(res)
 Vue.http.interceptors.push({
 
     request: function (request) {
