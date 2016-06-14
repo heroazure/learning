@@ -79,5 +79,6 @@ module.exports={
             less:ExtractTextPlugin.extract('css!postcss!less'),
             scss:ExtractTextPlugin.extract('css!postcss!sass')
         }
-    }
+    },
+    devtool: 'source-map'
 }

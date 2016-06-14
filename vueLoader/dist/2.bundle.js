@@ -1,26 +1,17 @@
 /*! 创建by heroxiao */
-webpackJsonp([2],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+webpackJsonp([2],{
+
+/***/ 13:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(11)
-	__vue_script__ = __webpack_require__(12)
+	__webpack_require__(14)
+	__vue_script__ = __webpack_require__(15)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\tab2.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(13)
+	__vue_template__ = __webpack_require__(16)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -39,43 +30,35 @@ webpackJsonp([2],[
 	})()}
 
 /***/ },
-/* 11 */
+
+/***/ 14:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 12 */
+
+/***/ 15:
 /***/ function(module, exports) {
 
-	// <template>
-	//     <div class="tab2">
-	//         {{msg}}
-	//     </div>
-	// </template>
-	//
-	// <script>
+	'use strict';
+	
 	module.exports = {
-	    data: function () {
+	    data: function data() {
 	        return {
 	            msg: 'tab2'
 	        };
 	    }
 	};
-	// </script>
-	//
-	// <style>
-	//     .tab2{
-	//         color: #00ff00;
-	//         border: 1px solid red;
-	//     }
-	// </style>
 
 /***/ },
-/* 13 */
+
+/***/ 16:
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"tab2\">\n    {{msg}}\n</div>\n";
 
 /***/ }
-]);
+
+});
+//# sourceMappingURL=2.bundle.js.map
