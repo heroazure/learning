@@ -16,7 +16,7 @@ webpackJsonp([1],[
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\tab1.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(9)
+	__vue_template__ = __webpack_require__(12)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -42,52 +42,74 @@ webpackJsonp([1],[
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// <template>
-	//     <div class="tab1" v-demo:hello.a.b="{value:'0',text:'nimei'}">
-	//         {{msg}}
-	//     </div>
-	// </template>
-	//
-	// <script>
+	'use strict';
+	
+	var _stringify = __webpack_require__(9);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	var myMixin = {
-	    created: function () {
+	    created: function created() {
 	        this.hello();
 	    },
 	    methods: {
-	        hello: function () {
+	        hello: function hello() {
 	            console.log('hello from mixin!');
 	        }
 	    }
 	};
 	module.exports = {
 	    mixins: [myMixin],
-	    data: function () {
+	    data: function data() {
 	        return {
 	            msg: 'tab1'
 	        };
 	    },
 	    directives: {
 	        'demo': {
-	            bind: function () {
+	            bind: function bind() {
 	                console.log('bind begin...');
 	            },
-	            update: function (newVal, oldVal) {
-	                this.el.innerHTML = 'name - ' + this.name + '<br>' + 'expression - ' + this.expression + '<br>' + 'argument - ' + this.arg + '<br>' + 'modifiers - ' + JSON.stringify(this.modifiers) + '<br>' + 'value - ' + JSON.stringify(newVal);
+	            update: function update(newVal, oldVal) {
+	                this.el.innerHTML = 'name - ' + this.name + '<br>' + 'expression - ' + this.expression + '<br>' + 'argument - ' + this.arg + '<br>' + 'modifiers - ' + (0, _stringify2.default)(this.modifiers) + '<br>' + 'value - ' + (0, _stringify2.default)(newVal);
 	            }
 	        }
 	    }
 	};
-	// </script>
-	//
-	// <style src="../less/tab1.less"></style>
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(10), __esModule: true };
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(11)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"tab1\" v-demo:hello.a.b=\"{value:'0',text:'nimei'}\">\n    {{msg}}\n</div>\n";
 
 /***/ }
 ]);
+//# sourceMappingURL=1.bundle.js.map
