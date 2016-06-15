@@ -14632,7 +14632,7 @@
 /* 31 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div>\n    <button @click='increment'>Increment +1</button>\n</div>\n";
+	module.exports = "\n<div>\n    <button @click='increment'>加1</button>\n    <button @click=\"reduce\">减1</button>\n</div>\n";
 
 /***/ },
 /* 32 */

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button @click='increment'>Increment +1</button>
+        <button @click='increment'>加1</button>
+        <button @click="reduce">减1</button>
     </div>
 </template>
 
@@ -9,7 +10,8 @@
     export default {
         vuex: {
             actions: {
-                increment: incrementCounter
+                increment: incrementCounter,
+//                reduce:reduceCounter
             }
         }
     }
