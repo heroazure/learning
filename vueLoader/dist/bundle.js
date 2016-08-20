@@ -14607,7 +14607,8 @@
 	exports.default = {
 	    vuex: {
 	        actions: {
-	            increment: _actions.incrementCounter
+	            increment: _actions.incrementCounter,
+	            reduceCounter: _actions.reduceCounter
 	        }
 	    }
 	};
@@ -14627,12 +14628,19 @@
 	
 	    dispatch('INCREMENT', 1);
 	};
+	
+	var reduceCounter = exports.reduceCounter = function reduceCounter(_ref2) {
+	    var dispatch = _ref2.dispatch;
+	    var state = _ref2.state;
+	
+	    dispatch('REDUCE', 2);
+	};
 
 /***/ },
 /* 31 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div>\n    <button @click='increment'>加1</button>\n    <button @click=\"reduce\">减1</button>\n</div>\n";
+	module.exports = "\n<div>\n    <button @click='increment'>加1</button>\n    <button @click='reduceCounter'>减2</button>\n</div>\n";
 
 /***/ },
 /* 32 */
@@ -14663,6 +14671,9 @@
 	var mutations = {
 	    INCREMENT: function INCREMENT(state, amount) {
 	        state.count = state.count + amount;
+	    },
+	    REDUCE: function REDUCE(state, amount) {
+	        state.count = state.count - amount;
 	    }
 	};
 	

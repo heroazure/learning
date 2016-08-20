@@ -15,6 +15,9 @@ const mutations = {
     // TODO: 放置我们的状态变更函数
     INCREMENT(state,amount){
         state.count=state.count+amount
+    },
+    REDUCE(state,amount){
+        state.count=state.count-amount
     }
 }
 
