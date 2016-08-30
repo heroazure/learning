@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Title</title>
+    <style>
+        aside{
+            background: #000;
+            height:300px;
+        }
+        article{
+            background: #ffdd00;
+            height:200px;
+        }
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: ' ';
+        }
+        .clearfix:after{
+            clear: both;
+        }
+        .content1>aside{
+            width:170px;
+            float: left;
+        }
+        .content1>article{
+            margin-left: 170px;
+            zoom: 1;
+        }
+        .content2>aside{
+            display: inline-block;
+            width:170px;
+        }
+        .content2>article{
+            display: inline-block;
+        }
+        .content3{
+            position: relative;
+            zoom: 1;
+        }
+        .content3>aside{
+            position: absolute;
+            left:0;
+            top:0;
+            width:170px;
+        }
+        .content3>article{
+            margin-left: 170px;
+            zoom: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="content1 clearfix">
+    <aside></aside>
+    <article>
+
+    </article>
+</div>
+<div class="content2 clearfix">
+    <aside></aside>
+    <article>
+
+    </article>
+</div>
+<div class="content3 clearfix">
+    <aside></aside>
+    <article>
+
+    </article>
+</div>
+</body>
+</html>
