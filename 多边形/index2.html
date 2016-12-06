@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>css graph</title>
+    <style type="text/css" media="screen">
+        /*五边形*/
+        #pentagon {
+            position: relative;
+            width: 54px;
+            border-width: 50px 18px 0;
+            border-style: solid;
+            border-color: #f66 transparent;
+            margin: 50px 0px 20px 20px;
+        }
+        #pentagon:before {
+            content: "";
+            position: absolute;
+            height: 0;
+            width: 0;
+            top: -85px;
+            left: -18px;
+            border-width: 0 45px 35px;
+            border-style: solid;
+            border-color: transparent transparent #f66;
+        }
+        /*六边形*/
+        #hexagon {
+            width: 100px;
+            height: 55px;
+            background: #f66;
+            position: relative;
+            margin: 50px 0px 50px 20px;
+        }
+        #hexagon:before {
+            content: "";
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 25px solid #f66;
+        }
+        #hexagon:after {
+            content: "";
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-top: 25px solid #f66;
+        }
+        /*八边形*/
+        #octagon {
+            width: 100px;
+            height: 100px;
+            background: #f66;
+            position: relative;
+        }
+        #octagon:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-bottom: 29px solid #f66;
+            border-left: 29px solid #fff;
+            border-right: 29px solid #fff;
+            width: 42px;
+            height: 0;
+        }
+        #octagon:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-top: 29px solid #f66;
+            border-left: 29px solid #fff;
+            border-right: 29px solid #fff;
+            width: 42px;
+            height: 0;
+        }
+    </style>
+</head>
+
+<body>
+<span style="font-size:27px;">CSS graph</span>
+<div id="pentagon"></div>五边形<br />
+<div id="hexagon"></div>六边形<br />
+<div id="octagon"></div>八边形<br />
+</body>
+</html>
+
+
