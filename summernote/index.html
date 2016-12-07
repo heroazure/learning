@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Title</title>
+    <!-- include libraries(jQuery, bootstrap) -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js-->
+    <link href="summernote.css" rel="stylesheet">
+    <script src="summernote.min.js"></script>
+    <script src="summernote-zh-CN.min.js"></script>
+</head>
+<body>
+<div id="summernote">
+
+</div>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 500,
+            tabsize: 2,
+            lang: 'zh-CN'
+        });
+    });
+</script>
+</body>
+</html>
