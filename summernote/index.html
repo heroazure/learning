@@ -17,17 +17,22 @@
     <script src="summernote-zh-CN.min.js"></script>
 </head>
 <body>
-<div id="summernote">
-
-</div>
+<textarea id="summernote" cols="30" rows="10"></textarea>
+<button type="button" id="test">fkskf</button>
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 500,
+            width:600,
             tabsize: 2,
             lang: 'zh-CN'
         });
+        $('#test').on('click',function () {
+            alert($('#summernote').summernote('code'))
+            alert($('#summernote').val())
+        })
     });
+
 </script>
 </body>
 </html>
