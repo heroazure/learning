@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Title</title>
+    <style>
+        .container{
+            background: #fff;
+            height:300px;
+            width:300px;
+            border:1px solid gray;
+        }
+        #dragula{
+            width:200px;
+            min-height:500px;
+            border:1px solid gray;
+        }
+        .item{
+            width:100%;
+            height:50px;
+            background: #ff0000;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    
+</div>
+<div class="container">
+
+</div>
+<!--<div id="dragula">
+<div class="item">lsjflsjflafjls</div>
+<div class="item">84530942309</div>
+<div class="item">wkjmnvnxkl</div>
+<div class="item">你妹啊啊</div>
+</div>-->
+<img id="img1" src="http://www.jq22.com/tx/19.png" alt="dfsl">
+<!--<script src="dragula.min.js"></script>-->
+<script>
+    var img=document.querySelector('#img1')
+    var containers=document.querySelectorAll('.container')
+    for(var i=0,len=containers.length;i<len;i++){
+        (function (i) {
+            containers[i].addEventListener('dragenter',function(){
+                containers[i].style.backgroundColor="#ff0000"
+            },false)
+            containers[i].addEventListener('drop',function(e){
+                e.preventDefault()
+                containers[i].style.backgroundColor=""
+                var copy=img.cloneNode(true)
+                copy.removeAttribute('id')
+                containers[i].appendChild(copy)
+            },false)
+            containers[i].addEventListener('dragover',function(e){
+                e.preventDefault()
+            },false)
+        })(i)
+    }
+    img.addEventListener('dragstart',function(){
+
+    },false)
+//    dragula([document.getElementById('dragula')])
+</script>
+</body>
+</html>

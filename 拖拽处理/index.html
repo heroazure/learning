@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>拖拽处理</title>
+    <style>
+        #draggable {
+            width: 200px;
+            height: 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .dropzone {
+            width: 200px;
+            height: 20px;
+            background: blueviolet;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="dropzone">
+    <div id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+        This div is draggable
+    </div>
+</div>
+<div class="dropzone" draggable="true"></div>
+<div class="dropzone"></div>
+<div class="dropzone"></div>
+<style>
+    *,
+    *:before,
+    *:after{
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    #menu{
+        display: table;
+        border:1px solid gray;
+        height:50px;
+        width:400px;
+        margin:0;
+        padding: 0;
+    }
+    #menu>li{
+        display: table-cell;
+        width:1%;
+        list-style: none;
+        border:1px solid #00f;
+        text-align: center;
+        vertical-align: middle;
+    }
+    #menu>li>a{
+        display: block;
+        width:100%;
+        height:100%;
+        cursor: move;
+        background-color: #f00;
+    }
+</style>
+<ul id="menu">
+    <li>
+        <a href="https://www.baidu.com" class="menu-item" draggable="true">a1</a></li>
+    <li><a href="https://www.baidu.com" class="menu-item" draggable="true">a2</a></li>
+    <li><a href="https://www.baidu.com" class="menu-item" draggable="true">a3</a></li>
+</ul>
+<script>
+    const menu=document.querySelector('#menu')
+    let drag
+    menu.addEventListener('dragstart',function(e){
+        drag=e.target
+        drag.style.color='#fff'
+        console.log('dragstart')
+    },false)
+
+    menu.addEventListener('dragend',function(e){
+        console.log('dragend')
+        drag.style.color=''
+    },false)
+
+    //
+    menu.addEventListener('dragover',function(e){
+        console.log('dragover')
+        e.preventDefault()
+    },false)
+    menu.addEventListener('dragenter',function(e){
+        console.log('dragenter')
+    },false)
+    menu.addEventListener('dragleave',function(e){
+        console.log('dragleave')
+    },false)
+    menu.addEventListener('drop',function(e){
+        e.preventDefault()
+        drag.style.color=''
+        if(e.target.className==='menu-item'&&e.target!==drag){
+            let replace=e.target.cloneNode(true)
+            let parent=e.target.parentNode
+            parent.innerHTML=''
+            parent.appendChild(drag.cloneNode(true))
+            let pp=drag.parentNode
+            pp.innerHTML=''
+            pp.appendChild(replace)
+//            console.log(replace)
+        }
+    },false)
+</script>
+<!--<script>
+    var dragged;
+
+    /* events fired on the draggable target */
+    document.addEventListener("drag", function( event ) {
+
+    }, false);
+
+    document.addEventListener("dragstart", function( event ) {
+        // store a ref. on the dragged elem
+        dragged = event.target;
+        // make it half transparent
+        event.target.style.opacity = .5;
+    }, false);
+
+    document.addEventListener("dragend", function( event ) {
+        // reset the transparency
+        event.target.style.opacity = "";
+    }, false);
+
+    /* events fired on the drop targets */
+    document.addEventListener("dragover", function( event ) {
+        // prevent default to allow drop
+        event.preventDefault();
+    }, false);
+
+    document.addEventListener("dragenter", function( event ) {
+        // highlight potential drop target when the draggable element enters it
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "purple";
+        }
+
+    }, false);
+
+    document.addEventListener("dragleave", function( event ) {
+        // reset background of potential drop target when the draggable element leaves it
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "";
+        }
+
+    }, false);
+
+    document.addEventListener("drop", function( event ) {
+        // prevent default action (open as link for some elements)
+        event.preventDefault();
+        // move dragged elem to the selected drop target
+        if ( event.target.className == "dropzone" ) {
+            event.target.style.background = "";
+            dragged.parentNode.removeChild( dragged );
+            event.target.appendChild( dragged );
+        }
+    }, false);
+</script>-->
+</body>
+</html>
