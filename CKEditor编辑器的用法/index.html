@@ -10,12 +10,33 @@
 <body>
 <button type="button" class="click">点击</button>
 <textarea class="ckeditor form-control" name="editor1" rows="6"></textarea>
+<textarea name="text1" id="text1" cols="30" rows="10"></textarea>
+<button type="button" class="click2">获取选中</button>
 <script src="../js/jquery-1.10.2.min.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
 <script>
     $(function () {
 
+        function getSelectionText() {
+            if(window.getSelection) {
+                return window.getSelection().toString();
+            } else if(document.selection && document.selection.createRange) {
+                return document.selection.createRange().text;
+            }
+            return '';
+        }
+        $(".click2").on("click", function (e) {
+            $('#text1').focus()
+            /*var selection=window.getSelection()
+            console.log(selection.rangeCount)
+            console.log(selection.getRangeAt(0))
+            console.log(selection.toString())*/
+            var dom=$('#text1')[0]
+            console.log(dom.selectionStart)
+            console.log(dom.selectionEnd)
+            console.log(dom.value.substring(dom.selectionStart,dom.selectionEnd))
 
+        })
         $(".click").on("click", function () {
             //editor1为<textarea class="ckeditor form-control" name="editor1" rows="6"></textarea>的name
             //CKEDITOR.instances.editor1.setData("");

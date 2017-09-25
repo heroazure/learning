@@ -12,6 +12,10 @@ function ff() {
 function foo() {
     console.log('foo')
 }
+function func55() {
+    console.log('func55')
+}
 //export * from './file1'
-export default foo;
-export{ff};
+export default foo
+export{ff}
+export {func55}

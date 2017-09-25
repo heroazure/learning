@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>flexbox</title>
+    <style>
+        *{
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .flex-grid{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .flex-grid-col{
+            flex-grow:1;
+            flex-shrink: 1;
+            flex-basis:33.33333%;
+            max-width:33.33333%;
+        }
+        .flex-grid{
+            height:1000px;
+            align-content: space-around;
+        }
+        .flex-grid-col{
+            height:50px;
+            padding:0 5px 10px;
+        }
+        .flex-grid-col>.child{
+            background-color: #aaa;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-grid">
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+    <div class="flex-grid-col">
+        <div class="child">
+            grid1
+        </div>
+    </div>
+</div>
+</body>
+</html>
