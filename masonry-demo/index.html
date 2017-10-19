@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>masonry</title>
+    <style>
+        .grid-wrap{
+            height:100px;
+            overflow-y: auto;
+        }
+        .grid{
+            width:630px;
+            background-color: #aaa;
+        }
+        .grid-item{
+            width:200px;
+            background-color: #00a0e9;
+            margin-bottom: 10px;
+        }
+        .ht1{
+            height:100px;
+        }
+        .ht2{
+            height:50px;
+        }
+        .ht3{
+            height:120px;
+        }
+        .ht4{
+            height:80px;
+        }
+        .ht5{
+            height:60px;
+        }
+        .ht6{
+            height:180px;
+        }
+        .ht7{
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+<div class="grid-wrap">
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200,"gutter":10 }'>
+        <div class="grid-item ht1">1</div>
+        <div class="grid-item ht2">2</div>
+        <div class="grid-item ht3">3</div>
+        <div class="grid-item ht4">4</div>
+        <div class="grid-item ht5">5</div>
+        <div class="grid-item ht6">6</div>
+        <div class="grid-item ht7">7</div>
+        <div class="grid-item ht8">8</div>
+    </div>
+</div>
+
+<script src="masonry.pkgd.min.js"></script>
+</body>
+</html>
