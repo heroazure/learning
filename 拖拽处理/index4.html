@@ -28,13 +28,69 @@
             float: left;
             border:1px solid #aaa;
             margin-right:3px;
+            padding:5px;
+            overflow-y: auto;
+        }
+        .item{
+            margin-top:5px;
+            width:100%;
+            height:60px;
+            background-color: #3b4249;
+            color: #fff;
+            cursor: move;
+        }
+        .gu-mirror {
+            position: fixed !important;
+            margin: 0 !important;
+            z-index: 9999 !important;
+            opacity: 0.9;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+            filter: alpha(opacity=90);
+        }
+        .gu-hide {
+            display: none !important;
+        }
+        .gu-unselectable {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+        .gu-transit {
+            opacity: 0.2;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+            filter: alpha(opacity=20);
         }
     </style>
 </head>
 <body>
+<a href="https://bevacqua.github.io/dragula/">dragula</a>
 <div class="clearfix">
-    <div class="container"></div>
-    <div class="container"></div>
+    <div class="container" id="left">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <div class="container" id="right">
+        <div class="item">01</div>
+        <div class="item">02</div>
+        <div class="item">03</div>
+        <div class="item">04</div>
+        <div class="item">05</div>
+    </div>
 </div>
+<script src="dragula.min.js"></script>
+<script>
+    dragula([document.getElementById('left'), document.getElementById('right')], {
+        copy: function (el, source) {
+            return source === document.getElementById('left')
+        },
+        accepts: function (el, target) {
+            return target !== document.getElementById('left')
+        }
+    });
+</script>
 </body>
 </html>
