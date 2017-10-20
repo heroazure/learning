@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <title>dragula</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.2/cropper.min.css">
     <style>
         *,
         *:before,
@@ -23,6 +24,7 @@
             clear: both;
         }
         .container{
+            position: relative;
             width:300px;
             height:600px;
             float: left;
@@ -33,11 +35,29 @@
         }
         .item{
             margin-top:5px;
-            width:100%;
-            height:60px;
+            width: 100px;
+            height: 80px;
             background-color: #3b4249;
             color: #fff;
             cursor: move;
+        }
+        .item>img{
+            width:100%;
+            height:100%;
+        }
+        .element{
+            width:50%;
+            height:150px;
+            border:1px solid #aaa;
+            overflow-y: auto;
+        }
+        .element.e2{
+            margin-top: 20px;
+            margin-left: 40px;
+        }
+        .element.e3{
+            margin-top: 60px;
+            margin-left: 20px;
         }
         .gu-mirror {
             position: fixed !important;
@@ -61,36 +81,123 @@
             -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
             filter: alpha(opacity=20);
         }
+        .wrap{
+            display: none;
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            background-color: rgba(0,0,0,.05);
+        }
+        .save{
+            position: absolute;
+            right:10px;
+            bottom:10px;
+        }
     </style>
 </head>
 <body>
 <a href="https://bevacqua.github.io/dragula/">dragula</a>
 <div class="clearfix">
-    <div class="container" id="left">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
+    <div class="container">
+        <div class="element e1" id="e1"></div>
+        <div class="element e2" id="e2"></div>
+        <div class="element e3" id="e3"></div>
+        <div class="wrap" id="wrap">
+            <img id="cropperImg" src="" alt="需裁剪图片">
+            <button type="button" class="save" id="save">保存</button>
+        </div>
     </div>
     <div class="container" id="right">
-        <div class="item">01</div>
-        <div class="item">02</div>
-        <div class="item">03</div>
-        <div class="item">04</div>
-        <div class="item">05</div>
+        <div class="item"><img src="./1.jpeg" alt="彭于晏"></div>
+        <div class="item"><img src="./2.jpg" alt="彭于晏"></div>
+        <div class="item"><img src="./3.jpg" alt="彭于晏"></div>
+        <div class="item"><img src="./4.jpeg" alt="彭于晏"></div>
+        <div class="item"><img src="./5.jpg" alt="彭于晏"></div>
     </div>
+    <div id="result"></div>
 </div>
 <script src="dragula.min.js"></script>
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.2/cropper.min.js"></script>
 <script>
-    dragula([document.getElementById('left'), document.getElementById('right')], {
-        copy: function (el, source) {
-            return source === document.getElementById('left')
-        },
-        accepts: function (el, target) {
-            return target !== document.getElementById('left')
+    $(function () {
+        let arry=[
+            document.getElementById('right'),
+            document.getElementById('e1'),
+            document.getElementById('e2'),
+            document.getElementById('e3')
+        ];
+        let $wrap=$('#wrap')
+        let croppable=false
+        let $image=$('#cropperImg')
+        let copyImg=null
+        dragula(arry, {
+            copy: function (el, source) {
+                return source === document.getElementById('right')
+            },
+            accepts: function (el, target) {
+                return target !== document.getElementById('right')
+            },
+            moves: function (el, source, handle, sibling) {
+                return el.tagName!=='IMG'
+            },
+        }).on('drop',function (el,target) {
+            if(target&&target.classList.contains('element')){
+                let img=el.querySelector('img')
+                img.style.maxWidth='100%'
+                img.style.height='auto'
+                target.innerHTML=img.outerHTML
+                copyImg=target.childNodes[0]
+                $wrap.show()
+                $image.attr('src',img.getAttribute('src'))
+                initCropper(1.5)
+            }
+        }).on('over',function (el,container) {
+            if(container.classList.contains('element')&&container.querySelector('img')){
+                window.container=container
+                container.querySelector('img').style.display='none'
+            }
+        }).on('out',function (el,container) {
+            if(container.classList.contains('element')&&container.querySelector('img')){
+                container.querySelector('img').style.display='block'
+            }
+        })
+        function initCropper(aspectRatio) {
+            $image.cropper({
+                viewMode: 1,
+                dragMode: 'move',
+                aspectRatio:aspectRatio||1,
+                //autoCropArea: .1,
+                restore: false,
+                guides: false,
+                highlight: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                ready:function () {
+                    croppable=true
+                }
+            })
         }
-    });
+        $('#save').on('click',function () {
+            var croppedCanvas;
+
+            if (!croppable) {
+                return;
+            }
+            croppable=false
+            // Crop
+            croppedCanvas = $image.cropper('getCroppedCanvas');
+
+            // Show
+            //$('#result').html('<img src="' + croppedCanvas.toDataURL() + '">')
+            copyImg.setAttribute('src',croppedCanvas.toDataURL())
+            $image.cropper('destroy')
+            $wrap.hide()
+        })
+    })
+
 </script>
 </body>
 </html>

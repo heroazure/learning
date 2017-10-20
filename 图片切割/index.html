@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>cropper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.2/cropper.min.css">
+    <style>
+        img{
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img id="image" src="./zh.png">
+</div>
+
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.2/cropper.min.js"></script>
+<script>
+    $('#image').cropper({
+        aspectRatio: 16 / 9,
+        crop: function(e) {
+            // Output the result data for cropping image.
+            console.log(e.x);
+            console.log(e.y);
+            console.log(e.width);
+            console.log(e.height);
+            console.log(e.rotate);
+            console.log(e.scaleX);
+            console.log(e.scaleY);
+        }
+    })
+</script>
+</body>
+</html>
