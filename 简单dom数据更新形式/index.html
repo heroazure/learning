@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test data update</title>
+</head>
+<body>
+<div>
+    <div>
+        <b key="date"></b>
+        <span key="user.name"></span>
+        <div><span key="articles.total"></span></div>
+        <div>
+            <div>
+                    <span><div><span key="articles.views"></span></div>
+                </span>
+                <div><span key="articles.notes"></span></div>
+                <span key="articles.updown.ups"></span><br><span key="articles.updown.downs"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // 简化例子，就不引入jquery了。
+    function update(data) {
+        [...document.querySelectorAll('[key]')].forEach(el => {
+            var keys = el.getAttribute('key').split('.');
+            var vals = data;
+            do {
+                let key = keys[0];
+                if (typeof vals[key] === 'undefined') {
+                    break;
+                }
+                keys.shift();
+                vals = vals[key];
+            } while (keys.length);
+            if (!keys.length) {
+                el.innerHTML = vals;
+            }
+        });
+    }
+    window.onload = function () {
+        // $.get(url, function(data){ update(data); }, 'json');
+        update({
+            date: new Date().toLocaleString(),
+            user: {
+                name: 'hello world'
+            },
+            articles: {
+                views: 10,
+                notes: 6,
+                likes: 5,
+                updown: {
+                    ups: 2,
+                    downs: 3
+                }
+            }
+        });
+    };
+</script>
+</body>
+</html>
